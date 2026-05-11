@@ -1,0 +1,22 @@
+---
+interface Props extends astroHTML.JSX.SVGAttributes {}
+
+const { class: className, id, ...rest } = Astro.props;
+---
+
+<svg
+  class={className}
+  id={id}
+  width="48"
+  height="53"
+  viewBox="0 0 48 53"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  {...rest}
+  ><path
+    d="M8 15.5H40M8 26H40M8 36.5H40"
+    stroke="currentcolor"
+    stroke-width="2.25"
+    stroke-linecap="square"
+    stroke-linejoin="round"></path>
+</svg>
