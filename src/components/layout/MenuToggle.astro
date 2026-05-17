@@ -43,7 +43,10 @@ const { initial = "menu", class: className = "", ...rest } = Astro.props;
       /* height: var(--menu-toggle-size); */
       height: ruler.fluid(40, 53);
       width: auto;
-      transition: opacity 200ms var(--ease, ease);
+      transition:
+        opacity 500ms var(--easing, ease),
+        transform 500ms var(--easing, ease);
+      transform-origin: center;
     }
   }
 
@@ -51,19 +54,22 @@ const { initial = "menu", class: className = "", ...rest } = Astro.props;
   .menuToggle[data-initial="menu"] :global(.menuToggle-icon--monogram),
   .menuToggle[data-initial="monogram"] :global(.menuToggle-icon--menu) {
     opacity: 0;
+    transform: scale(0.6);
     position: absolute;
     inset: 0;
     margin: auto;
   }
 
-  /* hover state: swap */
+  /* hover state: swap with scale */
   .menuToggle[data-initial="menu"]:hover :global(.menuToggle-icon--menu),
   .menuToggle[data-initial="monogram"]:hover
     :global(.menuToggle-icon--monogram) {
     opacity: 0;
+    transform: scale(0.6);
   }
   .menuToggle[data-initial="menu"]:hover :global(.menuToggle-icon--monogram),
   .menuToggle[data-initial="monogram"]:hover :global(.menuToggle-icon--menu) {
     opacity: 1;
+    transform: scale(1);
   }
 </style>

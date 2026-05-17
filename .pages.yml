@@ -216,6 +216,20 @@ components:
           - { name: id, label: Anchor ID, type: string }
           - { name: heading, label: Heading, type: string }
           - { name: body, label: Body, type: rich-text }
+      - name: peopleBlock
+        label: People
+        fields:
+          - { name: id, label: Anchor ID, type: string }
+          - { name: heading, label: Fixed bottom-left heading (e.g. PEOPLE), type: string }
+          - name: people
+            label: People
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Name, type: string, required: true }
+              - { name: image, label: Image (3:4), type: image, required: true }
+              - { name: imageAlt, label: Image alt text, type: string }
+              - { name: bio, label: Bio, type: rich-text }
       - name: enquiriesBlock
         label: Enquiries (centered monogram + wordmark)
         fields:

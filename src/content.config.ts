@@ -153,6 +153,17 @@ z.object({
   body: z.string().optional(),
 }),
 z.object({
+  type: z.literal("peopleBlock"),
+  id: z.string().optional(),
+  heading: z.string().optional(),
+  people: z.array(z.object({
+  name: z.string(),
+  image: image().or(z.string()),
+  imageAlt: z.string().optional(),
+  bio: z.string().optional(),
+})).default([]),
+}),
+z.object({
   type: z.literal("enquiriesBlock"),
   id: z.string().optional(),
   heading: z.string().optional(),

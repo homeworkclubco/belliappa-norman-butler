@@ -5,7 +5,15 @@ description: Scaffold a new page-section block for the Pages CMS + Astro content
 
 # New block scaffold
 
-Blocks are page-builder sections rendered by `BlockRenderer.astro` and edited via Pages CMS. Adding one touches **exactly 3 files** (`BlockRenderer.astro` auto-discovers blocks via `import.meta.glob` — do NOT edit it). Do them in this order — schema mismatches between them are the #1 source of bugs.
+Blocks are page-builder sections rendered by `BlockRenderer.astro` and edited via Pages CMS. Adding one touches **exactly 2 files you edit by hand**:
+
+1. `.pages.yml` — the CMS schema (source of truth)
+2. `src/components/blocks/{PascalName}.astro` — the new component
+
+Two other files update themselves and must **never be edited manually**:
+
+- `src/content.config.ts` — **auto-generated** from `.pages.yml` by `astro-pagescms` (note the header comment in the file). Editing it does nothing — your changes will be overwritten on the next build. After you edit `.pages.yml`, this file regenerates automatically.
+- `BlockRenderer.astro` — auto-discovers blocks via `import.meta.glob`.
 
 ## Flow
 
@@ -16,20 +24,20 @@ Blocks are page-builder sections rendered by `BlockRenderer.astro` and edited vi
    - `camelCase` name with `Block` suffix → CMS `name` + Astro `section.type` (e.g. `testimonialsCarouselBlock`). This must match every other block in this repo — `imageHeroBlock`, `headingBlock`, etc. The `BlockRenderer.astro` auto-dispatcher lowercases the first letter of the filename, so `TestimonialsCarouselBlock.astro` → key `testimonialsCarouselBlock`.
    - `PascalCase` component filename (e.g. `TestimonialsCarouselBlock.astro`)
 3. **Echo the derived spec back** as a tiny table (name → type → required?) and ask for confirmation before writing.
-4. **Scaffold all 3 touchpoints** (below). Build the layout with layout primitives (`Stack`, `Cluster`, `Sidebar`, `Switcher`, `Grid`, `Center`, `Cover`, `Frame`, `Reel`, `Imposter`) — do NOT hand-roll flex/grid in CSS. Only fall back to CSS for the things primitives genuinely can't express. Leave a `{/* TODO: refine styling */}` comment for fine polish.
-5. **Do NOT run the dev server or typecheck** unless asked. Report the 3 edits and stop.
+4. **Scaffold the 2 hand-edited files** (below). Build the layout with layout primitives (`Stack`, `Cluster`, `Sidebar`, `Switcher`, `Grid`, `Center`, `Cover`, `Frame`, `Reel`, `Imposter`) — do NOT hand-roll flex/grid in CSS. Only fall back to CSS for the things primitives genuinely can't express. Leave a `{/* TODO: refine styling */}` comment for fine polish.
+5. **Do NOT run the dev server or typecheck** unless asked. Report the edits and stop.
 
-## The 3 touchpoints
+## The touchpoints
 
-### 1. `.pages.yml`
+### 1. `.pages.yml` (hand-edit)
 
 Append under `content[0].fields` → the field with `name: sections` → `blocks:`. Match existing YAML style (inline `{ }` for short field defs, block style for nested).
 
-### 2. `src/content.config.ts`
+### 2. `src/content.config.ts` (DO NOT EDIT — auto-generated)
 
-Add a new `z.object({...})` variant to the `sections` `z.discriminatedUnion("type", [...])` in the `pages` collection. **Every `.pages.yml` field must have a matching zod field** with the mapping below.
+This file is regenerated from `.pages.yml` on every build by `astro-pagescms`. **Never edit it manually.** The field-type mapping table below tells you what the generator will produce, so you can write `.pages.yml` correctly — but the only file you save is `.pages.yml`.
 
-### 3. `src/components/blocks/{PascalName}.astro`
+### 3. `src/components/blocks/{PascalName}.astro` (new file)
 
 New file. Skeleton:
 
@@ -61,11 +69,14 @@ const { /* destructure */ } = Astro.props;
 
 Use `Heading` (never bare `<h1>`/`<h2>`/etc.) and prefer `set:html` for single-string content — see "Display primitives" and "Prefer `set:html`" sections below.
 
-### (No step 4 — `BlockRenderer.astro` is automatic)
+### `BlockRenderer.astro` is also automatic — do not edit
 
 `BlockRenderer.astro` uses `import.meta.glob` to discover every `*.astro` in `src/components/blocks/` and dispatches by `section.type`. As long as the **PascalCase filename → camelCase key** matches the `type` literal in `content.config.ts` and the `name` in `.pages.yml`, the block renders. No edits needed there.
 
-## Field-type mapping (`.pages.yml` → zod → TS prop)
+## Field-type mapping (`.pages.yml` → generated zod → TS prop)
+
+Reference only — you write the `.pages.yml` entry, the generator produces the zod. Use this table to know what TS types your component's `Props` should mirror.
+
 
 | Pages CMS `type`              | zod                                               | TS prop type                              | Notes |
 |-------------------------------|---------------------------------------------------|-------------------------------------------|-------|
@@ -202,9 +213,9 @@ z.object({
 ## Checklist before finishing
 
 - [ ] `.pages.yml` block entry added
-- [ ] zod variant added with matching field types (every YAML field mirrored, optionality preserved)
+- [ ] `src/content.config.ts` was NOT hand-edited (it regenerates from `.pages.yml`)
 - [ ] Component created under `src/components/blocks/` (filename PascalCase, type literal camelCase)
-- [ ] `name` in YAML and `z.literal(...)` in zod are **byte-identical** (camelCase ending in `Block`)
+- [ ] `name` in YAML and the component's `z.literal(...)` discriminator key are **byte-identical** (camelCase ending in `Block`)
 - [ ] No `colorScheme` prop
 - [ ] Layout built with primitives, not hand-rolled flex/grid
 - [ ] All headings use `<Heading>` from `@components/display/Heading.astro` (no bare `<h1>`/`<h2>`/etc.)
