@@ -1,0 +1,69 @@
+---
+import MenuIcon from "@components/svg/MenuIcon.astro";
+import MonogramIcon from "@components/svg/MonogramIcon.astro";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
+  /** Which icon is visible by default; the other shows on hover. */
+  initial?: "menu" | "monogram";
+  /** Icon size token applied to both icons (height in rem). */
+  size?: string;
+}
+
+const { initial = "menu", class: className = "", ...rest } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={["menuToggle", className]}
+  data-initial={initial}
+  onclick="window.dispatchEvent(new CustomEvent('open-nav'))"
+  aria-controls="mobile-menu"
+  aria-label="Open navigation menu"
+  {...rest}
+>
+  <MenuIcon class="menuToggle-icon menuToggle-icon--menu" />
+  <MonogramIcon class="menuToggle-icon menuToggle-icon--monogram" />
+</button>
+
+<style>
+  .menuToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: var(--space-2xs);
+    color: var(--color-foreground);
+    cursor: pointer;
+    position: relative;
+    line-height: 0;
+
+    & :global(.menuToggle-icon) {
+      /* height: var(--menu-toggle-size); */
+      height: ruler.fluid(40, 53);
+      width: auto;
+      transition: opacity 200ms var(--ease, ease);
+    }
+  }
+
+  /* default state: show "initial" icon, hide the other */
+  .menuToggle[data-initial="menu"] :global(.menuToggle-icon--monogram),
+  .menuToggle[data-initial="monogram"] :global(.menuToggle-icon--menu) {
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+  }
+
+  /* hover state: swap */
+  .menuToggle[data-initial="menu"]:hover :global(.menuToggle-icon--menu),
+  .menuToggle[data-initial="monogram"]:hover
+    :global(.menuToggle-icon--monogram) {
+    opacity: 0;
+  }
+  .menuToggle[data-initial="menu"]:hover :global(.menuToggle-icon--monogram),
+  .menuToggle[data-initial="monogram"]:hover :global(.menuToggle-icon--menu) {
+    opacity: 1;
+  }
+</style>

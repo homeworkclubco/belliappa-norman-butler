@@ -1,0 +1,49 @@
+---
+import canvasTextureImage from "@assets/images/canvas-texture.jpg";
+import heroRoseImage from "@assets/images/hero-rose.png";
+import Container from "@components/layout/Container.astro";
+import Section from "@components/layout/Section.astro";
+import FullLogo from "@components/svg/FullLogo.astro";
+import { Image } from "astro:assets";
+---
+
+<Section class="HomepageBlock" padding="0" colorScheme="light">
+  <Image src={heroRoseImage} alt="Hero Rose" class="rose" />
+  <Image class="texture" src={canvasTextureImage} alt="" />
+  <Container size="full">
+    <FullLogo class="logo" data-reveal style="--reveal-delay: 200ms;" />
+  </Container>
+</Section>
+
+<style>
+  .HomepageBlock {
+    min-block-size: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: end;
+    padding-block: var(--space-md);
+    /* position: relative; */
+    overflow: hidden;
+  }
+
+  .texture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+  }
+
+  .logo {
+    height: ruler.fluid(77, 180);
+    width: auto;
+  }
+
+  .rose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: ruler.fluid(300, 650);
+  }
+</style>

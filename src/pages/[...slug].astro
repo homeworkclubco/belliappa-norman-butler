@@ -14,13 +14,14 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { title, description, sections, seo } = page.data;
+const { title, description, sections, seo, hideHeaderTrigger } = page.data;
 ---
 
 <Layout
   title={seo?.title || title}
   description={seo?.description || description}
   ogImage={seo?.image}
+  hideHeaderTrigger={hideHeaderTrigger}
 >
   <BlockRenderer sections={sections} />
 </Layout>

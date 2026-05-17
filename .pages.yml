@@ -34,6 +34,9 @@ components:
         summary: "{type}"
     blockKey: type
     blocks:
+      - name: homepageBlock
+        label: Homepage
+        fields: []
       - name: imageHeroBlock
         label: Image Hero
         fields:
@@ -207,18 +210,24 @@ components:
             type: select
             options:
               values: ["none", "sm", "md", "lg", "xl", "2xl"]
-      - name: timelineBlock
-        label: Timeline
+      - name: stickyHeadingBlock
+        label: Sticky Heading Block
         fields:
           - { name: id, label: Anchor ID, type: string }
-          - name: steps
-            label: Steps
+          - { name: heading, label: Heading, type: string }
+          - { name: body, label: Body, type: rich-text }
+      - name: enquiriesBlock
+        label: Enquiries (centered monogram + wordmark)
+        fields:
+          - { name: id, label: Anchor ID, type: string }
+          - { name: heading, label: Bottom wordmark (e.g. ENQUIRIES), type: string }
+          - name: lines
+            label: Centered contact lines
             type: object
             list: true
             fields:
-              - { name: title, label: Phase title, type: string }
-              - { name: downtownDescription, label: Downtown description, type: string }
-              - { name: youDescription, label: Your role description, type: string }
+              - { name: text, label: Text, type: string }
+              - { name: href, label: Link URL (optional — e.g. mailto:info@bnb.art), type: string }
 
 content:
   - name: pages
@@ -234,6 +243,7 @@ content:
       - { name: title, label: Title (Internal reference), type: string }
       - { name: description, label: Description, type: text }
       - { name: slug, label: URL slug (e.g. about or services/events), type: string }
+      - { name: hideHeaderTrigger, label: Hide header menu trigger, description: "For pages that provide their own menu trigger (e.g. the centered monogram on Enquiries).", type: boolean, default: false }
       - name: seo
         component: seo
       - name: sections

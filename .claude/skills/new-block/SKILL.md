@@ -5,7 +5,7 @@ description: Scaffold a new page-section block for the Pages CMS + Astro content
 
 # New block scaffold
 
-Blocks are page-builder sections rendered by `BlockRenderer.astro` and edited via Pages CMS. Adding one touches **exactly 4 files**. Do them in this order — schema mismatches between them are the #1 source of bugs.
+Blocks are page-builder sections rendered by `BlockRenderer.astro` and edited via Pages CMS. Adding one touches **exactly 3 files** (`BlockRenderer.astro` auto-discovers blocks via `import.meta.glob` — do NOT edit it). Do them in this order — schema mismatches between them are the #1 source of bugs.
 
 ## Flow
 
@@ -13,13 +13,13 @@ Blocks are page-builder sections rendered by `BlockRenderer.astro` and edited vi
    - Block name in natural language (e.g. "testimonials carousel")
    - Fields it needs, in plain English — for each: name, purpose, required?, single vs list
 2. **Derive**:
-   - `snake_case` name → CMS `name` + Astro `section.type` (e.g. `testimonials_carousel`)
-   - `PascalCase` component filename (e.g. `TestimonialsCarousel.astro`)
+   - `camelCase` name with `Block` suffix → CMS `name` + Astro `section.type` (e.g. `testimonialsCarouselBlock`). This must match every other block in this repo — `imageHeroBlock`, `headingBlock`, etc. The `BlockRenderer.astro` auto-dispatcher lowercases the first letter of the filename, so `TestimonialsCarouselBlock.astro` → key `testimonialsCarouselBlock`.
+   - `PascalCase` component filename (e.g. `TestimonialsCarouselBlock.astro`)
 3. **Echo the derived spec back** as a tiny table (name → type → required?) and ask for confirmation before writing.
-4. **Scaffold all 4 touchpoints** (below). Use layout primitives for the component skeleton and leave a `{/* TODO styling */}` inside — the user handles final styling.
-5. **Do NOT run the dev server or typecheck** unless asked. Report the 4 edits and stop.
+4. **Scaffold all 3 touchpoints** (below). Build the layout with layout primitives (`Stack`, `Cluster`, `Sidebar`, `Switcher`, `Grid`, `Center`, `Cover`, `Frame`, `Reel`, `Imposter`) — do NOT hand-roll flex/grid in CSS. Only fall back to CSS for the things primitives genuinely can't express. Leave a `{/* TODO: refine styling */}` comment for fine polish.
+5. **Do NOT run the dev server or typecheck** unless asked. Report the 3 edits and stop.
 
-## The 4 touchpoints
+## The 3 touchpoints
 
 ### 1. `.pages.yml`
 
@@ -51,16 +51,19 @@ const { /* destructure */ } = Astro.props;
 <Section padding="xl">
   <Container>
     <Stack space="lg">
+      {heading && <Heading as="h2" set:html={heading} />}
+      {body && <Prose><Fragment set:html={body} /></Prose>}
       {/* TODO: final layout + styling — user will refine */}
     </Stack>
   </Container>
 </Section>
 ```
 
-### 4. `src/components/blocks/BlockRenderer.astro`
+Use `Heading` (never bare `<h1>`/`<h2>`/etc.) and prefer `set:html` for single-string content — see "Display primitives" and "Prefer `set:html`" sections below.
 
-- Add `import NewBlock from "./NewBlock.astro";` with the other imports (alphabetical).
-- Add a `{section.type === "new_block" && <NewBlock ... />}` line inside the `sections.map` block (keep alphabetical).
+### (No step 4 — `BlockRenderer.astro` is automatic)
+
+`BlockRenderer.astro` uses `import.meta.glob` to discover every `*.astro` in `src/components/blocks/` and dispatches by `section.type`. As long as the **PascalCase filename → camelCase key** matches the `type` literal in `content.config.ts` and the `name` in `.pages.yml`, the block renders. No edits needed there.
 
 ## Field-type mapping (`.pages.yml` → zod → TS prop)
 
@@ -93,25 +96,83 @@ const { /* destructure */ } = Astro.props;
 
 - **Do NOT add `colorScheme` to new blocks.** Not used on this site.
 - **Every new content collection gets a `uuid` field** (`type: uuid` in `.pages.yml`, `z.string().optional()` in zod). **All cross-collection relationships (`reference` fields) must key off `uuid`, not filename** — e.g. `options: { value: "{fields.uuid}" }`. Filenames change; UUIDs don't. See `case_studies` for the pattern. If a block references another collection, use UUIDs.
-- Block `name` in `.pages.yml` and the `type` literal in `content.config.ts` **must match exactly** (snake_case).
+- Block `name` in `.pages.yml` and the `type` literal in `content.config.ts` **must match exactly** (camelCase, ending in `Block` — e.g. `enquiriesBlock`, `imageHeroBlock`).
 - Always wrap in `<Section padding="...">` → `<Container>` → `<Stack>`. Never add padding to `Container`.
 - Rich-text bodies: `{body && <Prose><Fragment set:html={body} /></Prose>}`.
 - Images in a list inside a block: use `object` with `list: true`, fields `image` + a separate `imageAlt` string (see `tile_grid`).
-- Use layout primitives from `@components/layout/*` and display primitives from `@components/display/*`. See `.github/instructions/layouts.instructions.md` for the full primitive list — don't hand-roll flex/grid.
-- Don't write CSS values — use tokens (`var(--space-lg)`, `var(--color-accent)`, etc.).
-- Leave final styling as a `{/* TODO */}` comment; the user refines.
+
+### Layout primitives first
+
+Reach for layout primitives from `@components/layout/*` **before** writing any flex/grid CSS. Most block layouts can be built entirely from composition — `Stack`, `Cluster`, `Sidebar`, `Switcher`, `Grid`, `Center`, `Cover`, `Frame`, `Reel`, `Imposter`. Only write custom CSS when no combination of primitives expresses the layout. If you find yourself writing `display: flex` or `display: grid` in a `<style>` block, stop and check whether a primitive already does it.
+
+Don't write CSS values literally — use tokens (`var(--space-lg)`, `var(--color-accent)`, etc.).
+
+### Display primitives: Heading, Prose
+
+Headings: **always** use `@components/display/Heading.astro` — never bare `<h1>`/`<h2>`/etc. It exposes `as`, `size`, `weight`, `align`, `wrap`, `color`, `font`, `trim`, `truncate`, and `href` props that map to project design tokens. Bare `<h1>` skips the design system and forces ad-hoc CSS.
+
+```astro
+import Heading from "@components/display/Heading.astro";
+<Heading as="h1" size="6" font="heading">{heading}</Heading>
+```
+
+Rich text: wrap in `Prose` (`@components/display/Prose.astro`) and render with `set:html`.
+
+### Prefer `set:html` for static strings
+
+When a value is a single plain string going into a single element, prefer the `set:html` (or `set:text` for plain text without escaping concerns) attribute over an explicit children expression — it keeps the markup tidier and renders the same HTML.
+
+```astro
+{/* ✅ preferred — tidy */}
+<Heading as="h1" set:html={heading} />
+<li set:html={`<a href="${href}">${text}</a>`} />
+
+{/* also fine, but more verbose */}
+<Heading as="h1">{heading}</Heading>
+```
+
+Use `set:html` especially for CMS-authored strings that may contain inline HTML, and to flatten short conditional/mapped list items into one line. Use children expressions when you genuinely need to compose multiple Astro components or apply complex conditionals.
+
+### Media queries: desktop-first, use `breakpoints.css` tokens
+
+This project is **desktop-first**. Write the desktop layout as the base, then narrow the layout for smaller screens using `max-width` queries.
+
+**Always use the custom-media tokens from `src/styles/breakpoints.css`** — never hand-write `(min-width: ...)` or `(max-width: ...)` in pixels:
+
+```css
+/* ✅ correct: desktop-first, using tokens */
+.thing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (--md) {
+  /* below 1024px */
+  .thing { grid-template-columns: 1fr; }
+}
+
+/* ❌ wrong: mobile-first */
+.thing { grid-template-columns: 1fr; }
+@media (min-width: 1024px) { .thing { grid-template-columns: 1fr 1fr; } }
+
+/* ❌ wrong: hardcoded pixels */
+@media (max-width: 1023px) { ... }
+```
+
+Available tokens (see `src/styles/breakpoints.css`): `--2xs`/`--2xs-up` (420), `--xs`/`--xs-up` (520), `--sm`/`--sm-up` (768), `--md`/`--md-up` (1024), `--lg`/`--lg-up` (1280), `--xl`/`--xl-up` (1640), `--2xl`/`--2xl-up` (1920). The unsuffixed name is `max-width` (below the breakpoint); `-up` is `min-width` (at or above). Desktop-first means you'll mostly use the unsuffixed forms.
+
+Leave final styling polish as a `{/* TODO */}` comment; the user refines.
 
 ## Worked example (condensed)
 
 User: "Add a stats block with a heading and a list of stat items, each with a number and a label."
 
 Derive:
-- name: `stats_block`, component: `StatsBlock.astro`
+- name: `statsBlock`, component: `StatsBlock.astro`
 - fields: `heading` (string, optional), `items` (object list: `value` string, `label` string)
 
 **`.pages.yml`** (append under `blocks:`):
 ```yaml
-- name: stats_block
+- name: statsBlock
   label: Stats Block
   fields:
     - { name: heading, label: Heading, type: string }
@@ -127,7 +188,7 @@ Derive:
 **`content.config.ts`** (add variant in discriminated union):
 ```ts
 z.object({
-  type: z.literal("stats_block"),
+  type: z.literal("statsBlock"),
   heading: z.string().optional(),
   items: z.array(z.object({
     value: z.string(),
@@ -136,16 +197,17 @@ z.object({
 }),
 ```
 
-**`StatsBlock.astro`** — skeleton using Section/Container/Stack + a Grid for items.
-
-**`BlockRenderer.astro`** — import + dispatch line.
+**`StatsBlock.astro`** — skeleton using Section/Container/Stack + a Grid for items. No edits to `BlockRenderer.astro` needed.
 
 ## Checklist before finishing
 
 - [ ] `.pages.yml` block entry added
 - [ ] zod variant added with matching field types (every YAML field mirrored, optionality preserved)
-- [ ] Component created under `src/components/blocks/`
-- [ ] `BlockRenderer.astro` import + dispatch added
-- [ ] `name` in YAML and `z.literal(...)` in zod are **byte-identical**
+- [ ] Component created under `src/components/blocks/` (filename PascalCase, type literal camelCase)
+- [ ] `name` in YAML and `z.literal(...)` in zod are **byte-identical** (camelCase ending in `Block`)
 - [ ] No `colorScheme` prop
+- [ ] Layout built with primitives, not hand-rolled flex/grid
+- [ ] All headings use `<Heading>` from `@components/display/Heading.astro` (no bare `<h1>`/`<h2>`/etc.)
+- [ ] Single-string content uses `set:html` (or `set:text`) rather than verbose children expressions where it tidies the markup
+- [ ] Any media queries are desktop-first and use `breakpoints.css` custom-media tokens
 - [ ] Styling left as TODO for the user

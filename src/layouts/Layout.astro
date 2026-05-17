@@ -6,16 +6,16 @@ import "../styles/global.css";
 // import "../styles/vars.css";
 import SEO from "@components/layout/SEO.astro";
 import type { ImageMetadata } from "astro";
-import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: ImageMetadata | string;
+  hideHeaderTrigger?: boolean;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, hideHeaderTrigger = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -38,9 +38,12 @@ const { title, description, ogImage } = Astro.props;
       defer></script> -->
   </head>
   <body class="">
-    <Header />
+    <Header hideTrigger={hideHeaderTrigger} />
     <slot />
-    <Footer />
+    <script>
+      import "../scripts/reveal";
+    </script>
+    <!-- <Footer /> -->
     <!-- <CookieConsent /> -->
     <!-- <script>
       if (document.querySelector("[data-plyr-provider]")) {

@@ -28,9 +28,7 @@ const firstIsHero =
   sections[0]?.type === "imageHeroBlock";
 ---
 
-{!firstIsHero && <div class="header-spacer" aria-hidden="true" />}
-
-{
+<!-- {!firstIsHero && <div class="header-spacer" aria-hidden="true" />} -->{
   sections.map((block, index) => {
     const Component = components[block.type];
 

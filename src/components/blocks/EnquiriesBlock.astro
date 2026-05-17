@@ -1,0 +1,87 @@
+---
+import Heading from "@components/display/Heading.astro";
+import Cover from "@components/layout/Cover.astro";
+import MenuToggle from "@components/layout/MenuToggle.astro";
+import Section from "@components/layout/Section.astro";
+import Stack from "@components/layout/Stack.astro";
+import type { InferEntrySchema } from "astro:content";
+
+type Section_ = NonNullable<InferEntrySchema<"pages">["sections"]>[number];
+
+interface Props {
+  block: Extract<Section_, { type: "enquiriesBlock" }>;
+  index: number;
+}
+
+const { block } = Astro.props;
+const { id, heading, lines = [] } = block;
+---
+
+<Section id={id} class="EnquiriesBlock" padding="none">
+  <Cover minHeight="100vh" space="lg">
+    <div slot="top" class="enquiries-trigger-wrap" data-reveal>
+      <MenuToggle initial="monogram" />
+    </div>
+
+    <Stack
+      as="ul"
+      space="2xs"
+      align="center"
+      text="center"
+      class="enquiries-lines"
+      data-reveal
+      style="--reveal-delay: 0.15s;"
+    >
+      <p>
+        <a href="mailto:info@bnb.art">info@bnb.art</a>
+      </p>
+      <p>Viewings by appointment</p>
+    </Stack>
+
+    {
+      heading && (
+        <Heading
+          as="h1"
+          slot="bottom"
+          class="mx-auto text-center"
+          set:html={heading}
+          data-reveal
+          style="--reveal-delay: 0.3s;"
+        />
+      )
+    }
+  </Cover>
+</Section>
+
+<style>
+  .EnquiriesBlock {
+    overflow: hidden;
+  }
+
+  .enquiries-trigger-wrap {
+    display: flex;
+    justify-content: center;
+    padding-block-start: var(--space-md);
+  }
+
+  .enquiries-lines {
+    font-family: var(--font-family-alt);
+    font-size: var(--font-size-1);
+    letter-spacing: var(--letter-spacing-loosest);
+    text-transform: uppercase;
+
+    p {
+      letter-spacing: var(--letter-spacing-loosest);
+    }
+
+    :global(a) {
+      color: currentColor;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+  }
+  /* TODO: refine type sizes / spacing once content is in */
+</style>

@@ -21,7 +21,7 @@ const spaceSteps = [
   '5xl',
   '6xl',
 ]
-const fontSteps = [-2, -1, 0, 1, 2, 3, 4, 5, 'heading-lg', 'heading-xl', 'subheading-lg']
+const fontSteps = [-2, -1, 0, 1, 2, 3, ]
 
 // ==========================================
 // END CONFIG SETUP

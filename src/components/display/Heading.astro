@@ -19,7 +19,7 @@ interface Props extends HTMLAttributes<"h1"> {
 
 const {
   as: Tag = "h2",
-  size = "4",
+  size = "3",
   weight = "regular",
   align,
   trim = "normal",
@@ -67,6 +67,7 @@ const {
       color: var(--color-foreground);
       text-wrap: balance;
       text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-looser);
     }
 
     /* --- Weights --- */
@@ -131,10 +132,6 @@ const {
     /* --- Font --- */
     .heading[data-font="heading"] {
       font-family: var(--font-family-heading);
-      font-stretch: 125%;
-
-      font-weight: var(--font-weight-black);
-      line-height: 1;
     }
 
     .heading[data-font="body"] {

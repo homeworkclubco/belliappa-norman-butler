@@ -1,0 +1,81 @@
+---
+import Heading from "@components/display/Heading.astro";
+import Prose from "@components/display/Prose.astro";
+import Cluster from "@components/layout/Cluster.astro";
+import Container from "@components/layout/Container.astro";
+import Section from "@components/layout/Section.astro";
+import type { InferEntrySchema } from "astro:content";
+
+type Section_ = NonNullable<InferEntrySchema<"pages">["sections"]>[number];
+
+interface Props {
+  block: Extract<Section_, { type: "stickyHeadingBlock" }>;
+  index: number;
+}
+
+const { block } = Astro.props;
+const { id, heading, body } = block;
+---
+
+<Section id={id} class="StickyHeadingBlock" padding="sm">
+  <Container size="full">
+    <Cluster
+      justify="between"
+      align="end"
+      class="layout md:align-start md:flex-col"
+      space="2xl"
+    >
+      <div class="heading-col" data-reveal>
+        {heading && <Heading as="h2" size="3" set:html={heading} />}
+      </div>
+      <div class="body-col" data-reveal style="--reveal-delay: 200ms;">
+        {
+          body && (
+            <Prose>
+              <Fragment set:html={body} />
+            </Prose>
+          )
+        }
+      </div>
+    </Cluster>
+  </Container>
+</Section>
+
+<style>
+  .StickyHeadingBlock {
+    display: flex;
+    align-items: end;
+    min-height: 100vh;
+    min-height: calc(100svh - var(--header-height));
+
+    .layout {
+      /* display: grid;
+      gap: var(--space-lg); */
+    }
+
+    .body-col :global(.prose) {
+      margin-inline: 0;
+    }
+
+    @media (min-width: 768px) {
+      & {
+      }
+
+      .layout {
+        /* grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+        min-height: inherit; */
+      }
+
+      .heading-col {
+        position: relative;
+      }
+
+      .heading-inner {
+        position: sticky;
+        bottom: var(--space-lg);
+        top: auto;
+      }
+    }
+  }
+</style>

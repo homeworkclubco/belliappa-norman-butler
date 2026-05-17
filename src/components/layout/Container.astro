@@ -1,8 +1,8 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'div'> {
-  as?: string
+interface Props extends HTMLAttributes<"div"> {
+  as?: string;
   /**
    * The max-width of the container.
    * - default: ~110rem (Site max)
@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<'div'> {
    * - wide: ~80rem
    * - full: 100%
    */
-  size?: 'default' | 'narrow' | 'prose' | 'wide' | 'full'
+  size?: "default" | "narrow" | "prose" | "wide" | "full";
 
   /**
    * Activates the 12-column Full Bleed Grid.
@@ -19,10 +19,16 @@ interface Props extends HTMLAttributes<'div'> {
    * - 6: Sets 6 columns
    * - 12: Sets 12 columns
    */
-  bleed?: boolean | 6 | 12
+  bleed?: boolean | 6 | 12;
 }
 
-const { as: Tag = 'div', size = 'default', bleed = false, class: className, ...rest } = Astro.props
+const {
+  as: Tag = "div",
+  size = "default",
+  bleed = false,
+  class: className,
+  ...rest
+} = Astro.props;
 
 /* * CLEAN HTML STRATEGY
  * Filter default values.
@@ -32,19 +38,20 @@ const { as: Tag = 'div', size = 'default', bleed = false, class: className, ...r
  * - number -> string (e.g. "6")
  */
 const attributes = {
-  'data-size': size === 'default' ? undefined : size,
-  'data-bleed': bleed === false ? undefined : bleed === true ? '12' : String(bleed),
-}
+  "data-size": size === "default" ? undefined : size,
+  "data-bleed":
+    bleed === false ? undefined : bleed === true ? "12" : String(bleed),
+};
 ---
 
-<Tag class:list={['container', className]} {...attributes} {...rest}>
+<Tag class:list={["container", className]} {...attributes} {...rest}>
   <slot />
 </Tag>
 
 <style>
   :root {
     --container-max-width: 110rem;
-    --container-padding: var(--space-md-2xl);
+    --container-padding: var(--space-md-lg);
   }
 
   @layer base {
@@ -58,16 +65,16 @@ const attributes = {
       padding-inline: var(--_container-padding);
     }
 
-    [data-size='narrow'] {
+    [data-size="narrow"] {
       --_container-max-width: 45ch;
     }
-    [data-size='prose'] {
+    [data-size="prose"] {
       --_container-max-width: 70ch;
     }
-    [data-size='wide'] {
+    [data-size="wide"] {
       --_container-max-width: 80rem;
     }
-    [data-size='full'] {
+    [data-size="full"] {
       --_container-max-width: 100%;
     }
 
@@ -80,7 +87,11 @@ const attributes = {
       max-width: 100%;
 
       --_col-size: calc(
-        min(100% - (var(--_container-padding) * 2), var(--_container-max-width)) / var(--_cols)
+        min(
+            100% - (var(--_container-padding) * 2),
+            var(--_container-max-width)
+          ) /
+          var(--_cols)
       );
 
       grid-template-columns:
@@ -89,10 +100,10 @@ const attributes = {
         minmax(var(--_container-padding), 1fr) [full-end];
     }
 
-    [data-bleed='6'] {
+    [data-bleed="6"] {
       --_cols: 6;
     }
-    [data-bleed='12'] {
+    [data-bleed="12"] {
       --_cols: 12;
     }
 

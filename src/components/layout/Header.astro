@@ -1,12 +1,21 @@
 ---
-import MenuIcon from "@components/svg/MenuIcon.astro";
 import MonogramIcon from "@components/svg/MonogramIcon.astro";
-import Button from "../actions/Button.astro";
 import Cluster from "./Cluster.astro";
 import Container from "./Container.astro";
+import MenuToggle from "./MenuToggle.astro";
 import Section from "./Section.astro";
 
-const navLinks = [{ href: "/about", label: "About" }];
+interface Props {
+  hideTrigger?: boolean;
+}
+
+const { hideTrigger = false } = Astro.props;
+
+const navLinks = [
+  { href: "/work", label: "Work" },
+  { href: "/people", label: "People" },
+  { href: "/contact", label: "Enquiries" },
+];
 
 const mobileNavLinksHtml = navLinks
   .map(
@@ -39,27 +48,25 @@ const mobileNavLinksHtml = navLinks
       window.addEventListener('resize', () => this.syncHeaderHeight(), { passive: true });
     },
   }"
+  @open-nav.window="menuOpen = true; $nextTick(() => $refs.closeBtn?.focus())"
   :data-scrolled="isScrolled.toString()"
   :class="{ 'is-scrolled': isScrolled }"
 >
-  <Container>
-    <Cluster justify="start" class="start">
-      <button
-        class="menuToggle"
-        @click="menuOpen = true; $nextTick(() => $refs.closeBtn.focus())"
-        :aria-expanded="menuOpen.toString()"
-        aria-controls="mobile-menu"
-        aria-label="Open navigation menu"
-      >
-        <MenuIcon class="menuToggle-icon" />
-        <MonogramIcon class="menuToggle-monogram" />
-      </button>
-    </Cluster>
-  </Container>
+  {
+    !hideTrigger && (
+      <Container size="full">
+        <Cluster justify="start" class="start">
+          <MenuToggle initial="menu" />
+        </Cluster>
+      </Container>
+    )
+  }
+
+  <!-- MOBILE NAVIGATION -->
 
   <template x-teleport="body">
     <div
-      data-color-scheme="dark"
+      data-color-scheme="light"
       id="mobile-menu"
       role="dialog"
       aria-modal="true"
@@ -76,9 +83,9 @@ const mobileNavLinksHtml = navLinks
       class="mobile-nav"
     >
       <div class="mobile-nav-inner">
-        <div class="mobile-nav-header">
+        <Cluster class="mobile-nav-header" justify="between">
           <a href="/" aria-label="Home" class="mobile-nav-logo">
-            <span class="logo-text">Starter</span>
+            <MonogramIcon />
           </a>
 
           <button
@@ -92,7 +99,7 @@ const mobileNavLinksHtml = navLinks
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
+              stroke-width="1.25"
               stroke-linecap="round"
               aria-hidden="true"
             >
@@ -100,17 +107,11 @@ const mobileNavLinksHtml = navLinks
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-        </div>
+        </Cluster>
 
-        <nav class="mobile-nav-links" aria-label="Main navigation">
+        <nav class="mobileNavLinks" aria-label="Main navigation">
           <ul set:html={mobileNavLinksHtml} />
         </nav>
-
-        <div class="mobile-nav-footer">
-          <Button href="/#contact" fullWidth @click="menuOpen = false"
-            >Get in Touch</Button
-          >
-        </div>
       </div>
     </div>
   </template>
@@ -135,14 +136,13 @@ const mobileNavLinksHtml = navLinks
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding-block: var(--space-sm);
+    padding-block: var(--space-md);
   }
 
   nav {
     a {
-      font-family: var(--font-family-heading-alt);
-      font-size: var(--font-size-1);
-      font-weight: var(--font-weight-black);
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-3);
       text-transform: uppercase;
       color: var(--color-foreground);
 
@@ -163,6 +163,7 @@ const mobileNavLinksHtml = navLinks
     color: var(--color-foreground);
     cursor: pointer;
     position: relative;
+    padding: 0;
 
     &:hover {
       .menuToggle-icon {
@@ -194,20 +195,25 @@ const mobileNavLinksHtml = navLinks
 
 <style>
   /* Transition helpers applied by Alpine x-transition */
-  .mobile-nav-enter,
+  .mobile-nav-enter {
+    transition:
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   .mobile-nav-leave {
     transition:
-      transform 480ms cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 380ms ease;
+      transform 700ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .mobile-nav-from {
-    transform: translateX(100%);
+    transform: translateY(-1.5rem);
     opacity: 0;
   }
 
   .mobile-nav-to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 
@@ -216,7 +222,6 @@ const mobileNavLinksHtml = navLinks
     position: fixed;
     inset: 0;
     z-index: 200;
-
     overflow-y: auto;
     overscroll-behavior: contain;
     top: 0;
@@ -225,15 +230,25 @@ const mobileNavLinksHtml = navLinks
       display: flex;
       flex-direction: column;
       min-height: 100%;
-      padding: var(--space-sm) var(--space-md) var(--space-xl);
+      padding-block: var(--space-md);
+      padding-inline: var(--container-padding);
     }
 
     /* Top bar — logo + close */
     .mobile-nav-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
-      padding-block: var(--space-sm);
+    }
+
+    .mobile-nav-logo {
+      display: block;
+      /* color: currentColor;
+
+      svg {
+        height: 2.5rem;
+        width: auto;
+      } */
     }
 
     .mobile-nav-close {
@@ -247,8 +262,8 @@ const mobileNavLinksHtml = navLinks
       padding: var(--space-2xs);
 
       svg {
-        width: 2rem;
-        height: 2rem;
+        width: 1.75rem;
+        height: 1.75rem;
       }
 
       &:hover {
@@ -256,48 +271,46 @@ const mobileNavLinksHtml = navLinks
       }
     }
 
-    /* Nav links */
-    .mobile-nav-links {
+    /* Nav links — pinned to bottom-left */
+    .mobileNavLinks {
       flex: 1;
       display: flex;
-      align-items: flex-start;
-      padding-block: var(--space-xl);
-      text-transform: uppercase;
-      font-weight: 900;
-      font-stretch: 125%;
-      font-width: 125%;
-      font-family: var(--font-family-heading-alt);
-      font-size: var(--font-size-5);
+      align-items: flex-end;
+      justify-content: flex-start;
+      /* padding-block: var(--space-xl); */
 
-      ul {
+      /* ul {
         list-style: none;
         padding: 0;
         margin: 0;
         display: flex;
         flex-direction: column;
-        gap: var(--space-lg);
+      } */
+
+      ul {
+        &:hover {
+          :global(a) {
+            opacity: 0.4;
+          }
+        }
       }
 
-      a {
+      :global(a) {
         display: block;
-        font-family: var(--font-family-heading-alt);
-        font-size: var(--font-size-5);
-        font-weight: 900;
-        line-height: 1;
+        font-family: var(--font-family-heading);
+        /* font-weight: var(--font-weight-thin); */
+        /* font-size: 42px; */
+        font-size: var(--font-size-3);
+        line-height: var(--line-height-snug);
+        letter-spacing: var(--letter-spacing-looser);
         text-transform: uppercase;
         color: currentColor;
         text-decoration: none;
-        transition: opacity 200ms ease;
-
-        &:hover {
-          opacity: 0.5;
-        }
+        transition: 0.5s all var(--ease);
       }
-    }
-
-    /* Bottom CTA */
-    .mobile-nav-footer {
-      padding-top: var(--space-lg);
+      :global(a:hover) {
+        opacity: 1 !important;
+      }
     }
   }
 

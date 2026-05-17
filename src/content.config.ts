@@ -15,6 +15,7 @@ const pages = defineCollection({
   title: z.string().optional(),
   description: z.string().optional(),
   slug: z.string().optional(),
+  hideHeaderTrigger: z.boolean().default(false),
   seo: z.object({
   title: z.string().optional(),
   description: z.string().optional(),
@@ -22,6 +23,9 @@ const pages = defineCollection({
 }).optional(),
   sections: z.array(
 z.discriminatedUnion("type", [
+z.object({
+  type: z.literal("homepageBlock"),
+}),
 z.object({
   type: z.literal("imageHeroBlock"),
   id: z.string().optional(),
@@ -143,12 +147,18 @@ z.object({
   padding: z.enum(["none", "sm", "md", "lg", "xl", "2xl"]).optional(),
 }),
 z.object({
-  type: z.literal("timelineBlock"),
+  type: z.literal("stickyHeadingBlock"),
   id: z.string().optional(),
-  steps: z.array(z.object({
-  title: z.string().optional(),
-  downtownDescription: z.string().optional(),
-  youDescription: z.string().optional(),
+  heading: z.string().optional(),
+  body: z.string().optional(),
+}),
+z.object({
+  type: z.literal("enquiriesBlock"),
+  id: z.string().optional(),
+  heading: z.string().optional(),
+  lines: z.array(z.object({
+  text: z.string().optional(),
+  href: z.string().optional(),
 })).default([]),
 }),
 ])
