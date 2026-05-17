@@ -13,7 +13,6 @@
 
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
-import { getCollection } from "astro:content";
 import { SITE } from "@config";
 
 interface Props {
@@ -40,9 +39,6 @@ if (ogImage) {
     ogImageUrl = new URL(processed.src, Astro.site).href;
   }
 }
-
-const services = await getCollection("services");
-const sortedServices = services.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
 const { organization, localBusiness } = SITE.jsonld;
 
@@ -71,20 +67,6 @@ const schemaLocalBusiness = {
       addressLocality: localBusiness.address.addressLocality,
       postalCode: localBusiness.address.postalCode,
       addressCountry: localBusiness.address.addressCountry,
-    },
-  }),
-  ...(sortedServices.length > 0 && {
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Services",
-      itemListElement: sortedServices.map((s) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: s.data.title,
-          description: s.data.description,
-        },
-      })),
     },
   }),
 };

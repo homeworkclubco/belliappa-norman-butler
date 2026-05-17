@@ -4,11 +4,6 @@ media:
   output: ../../assets/uploads
 
 components:
-  image_with_alt:
-    type: object
-    fields:
-      - { name: src, label: Image, type: image }
-      - { name: alt, label: Alt text, type: string }
   seo:
     type: object
     label: SEO & social sharing
@@ -25,10 +20,10 @@ components:
         label: "Social share image"
         description: "recommended: 1200×630px"
         type: image
-  sections: 
+  sections:
     label: Page sections
     type: block
-    list: 
+    list:
       collapsible:
         collapsed: true
         summary: "{type}"
@@ -37,199 +32,18 @@ components:
       - name: homepageBlock
         label: Homepage
         fields: []
-      - name: imageHeroBlock
-        label: Image Hero
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-          - { name: image, label: Image, type: image, required: true }
-          - { name: imageAlt, label: Image alt text, type: string }
-          - { name: minHeight, label: Min height (e.g. 28rem), type: string }
-          - name: colorScheme
-            label: Colour scheme
-            type: select
-            options:
-              values: ["light", "dark"]
-      - name: headingBlock
-        label: Heading Block
-        fields:
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-          - { name: id, label: Anchor ID, type: string }
-          - name: pt
-            label: Padding top
-            type: select
-            options:
-              values: ["none", "sm", "md", "lg", "xl", "2xl"]
-          - name: pb
-            label: Padding bottom
-            type: select
-            options:
-              values: ["none", "sm", "md", "lg", "xl", "2xl"]
-      - name: videoHeroBlock
-        label: Video Hero
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: src, label: YouTube URL, type: string, required: true }
-          - { name: poster, label: Poster image, type: image }
-      - name: contactBlock
-        label: Contact
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-      - name: leadBlock
-        label: Lead Block
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: body, label: Body, type: rich-text }
       - name: textBlock
         label: Text Block
         fields:
           - { name: id, label: Anchor ID, type: string }
           - { name: heading, label: Heading, type: string }
           - { name: body, label: Body, type: rich-text }
-      - name: clientLogosBlock
-        label: Client Logos
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-      - name: serviceCardsBlock
-        label: Service Cards
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-      - name: caseStudyGridBlock
-        label: Case Study Grid
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-          - name: order
-            label: Case studies (drag to reorder; unselected appear after, alphabetically)
-            type: reference
-            list: true
-            options:
-              collection: case_studies
-              value: "{fields.uuid}"
-              search: title
-              label: "{fields.title}"
-      - name: galleryBlock
-        label: Gallery
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - name: images
-            label: Images
-            component: image_with_alt
-            list: true
-      - name: mediaTextBlock
-        label: Media + Text
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: body, label: Body, type: rich-text }
-          - name: image
-            label: Image
-            component: image_with_alt
-          - name: mediaSide
-            label: Media side
-            type: select
-            options:
-              values: ["left", "right"]
-          - name: padding
-            label: Padding
-            type: select
-            options:
-              values: ["none", "sm", "md", "lg", "xl", "2xl"]
-          - name: fixedRatio
-            label: Image ratio (e.g. 4/3, 16/9)
-            type: string
-          - name: cta
-            label: CTA
-            type: object
-            fields:
-              - { name: label, label: Label, type: string }
-              - { name: href, label: URL, type: string }
-      - name: tileGridBlock
-        label: Tile Grid
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - name: columns
-            label: Columns
-            type: select
-            options:
-              values: ["2", "3"]
-          - name: items
-            label: Tiles
-            type: object
-            list: true
-            fields:
-              - { name: title, label: Title, type: string }
-              - { name: image, label: Image, type: image }
-              - { name: imageAlt, label: Image alt text, type: string }
-              - { name: href, label: Link URL, type: string }
-              - { name: cta, label: CTA label, type: string }
-      - name: textGridBlock
-        label: Text Grid
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: subtitle, label: Subtitle, type: string }
-          - name: items
-            label: Items
-            type: object
-            list: true
-            fields:
-              - { name: title, label: Title, type: string }
-              - { name: body, label: Body, type: rich-text }
-      - name: mediaBlock
-        label: Media
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - name: mediaType
-            label: Media type
-            type: select
-            options:
-              values: ["image", "video"]
-          - { name: image, label: Image, type: image }
-          - { name: imageAlt, label: Image alt text, type: string }
-          - { name: youtubeUrl, label: YouTube URL, type: string }
-          - { name: caption, label: Caption, type: string }
-          - name: width
-            label: Width
-            type: select
-            options:
-              values: ["full", "wide", "default", "narrow"]
-          - name: padding
-            label: Padding
-            type: select
-            options:
-              values: ["none", "sm", "md", "lg", "xl", "2xl"]
       - name: stickyHeadingBlock
         label: Sticky Heading Block
         fields:
           - { name: id, label: Anchor ID, type: string }
           - { name: heading, label: Heading, type: string }
           - { name: body, label: Body, type: rich-text }
-      - name: peopleBlock
-        label: People
-        fields:
-          - { name: id, label: Anchor ID, type: string }
-          - { name: heading, label: Fixed bottom-left heading (e.g. PEOPLE), type: string }
-          - name: people
-            label: People
-            type: object
-            list: true
-            fields:
-              - { name: name, label: Name, type: string, required: true }
-              - { name: image, label: Image (3:4), type: image, required: true }
-              - { name: imageAlt, label: Image alt text, type: string }
-              - { name: bio, label: Bio, type: rich-text }
       - name: enquiriesBlock
         label: Enquiries (centered monogram + wordmark)
         fields:

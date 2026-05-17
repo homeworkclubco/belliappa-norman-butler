@@ -21,14 +21,9 @@ for (const [path, mod] of Object.entries(componentModules)) {
 }
 
 const { sections } = Astro.props;
-
-// TODO: consider moving header-spacer logic into the hero block components themselves
-const firstIsHero =
-  sections[0]?.type === "videoHeroBlock" ||
-  sections[0]?.type === "imageHeroBlock";
 ---
 
-<!-- {!firstIsHero && <div class="header-spacer" aria-hidden="true" />} -->{
+{
   sections.map((block, index) => {
     const Component = components[block.type];
 
@@ -42,9 +37,3 @@ const firstIsHero =
     return <Component block={block} index={index} />;
   })
 }
-
-<style>
-  .header-spacer {
-    height: var(--header-height, 5rem);
-  }
-</style>

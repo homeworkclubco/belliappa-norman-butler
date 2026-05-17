@@ -9,7 +9,7 @@ import rehypeYoutubePlyr from './src/plugins/rehype-youtube-plyr.mjs';
 
 import redirectsData from './src/content/redirects.json';
 
-import pagesCMS from 'pagescms-astro';
+import pagesCMS from 'astro-pagescms';
 
 
 const redirects = Object.fromEntries(
