@@ -9,9 +9,7 @@ sections:
     heading: People
     people:
       - name: Shruti Belliappa
-        image:
-          src: https://placehold.co/3000x4000
-          alt: portrait of Shruti Belliappa
+        
         bio: >-
           <p>Shruti Belliappa is an art historian, advisor and theorist specialising in postwar and contemporary art. Since 2012, she has worked on strategic acquisitions and curating) for a global roster of clients, including three significant private art collections based in the US, Europe and Brazil, overseeing their transformation into museum quality collections. </p>
 
@@ -19,9 +17,7 @@ sections:
 
           <p>In the lull of the pandemic, she began her doctoral research at the Visual Cultures department at Goldsmiths College London interrogating borders, artificial life, and the technologies of belonging. At present, she is writing up her thesis conclusions. As a devotee of the written word as much as the visual arts, her long term projects include Notes on Grief, a book of non-fiction and a novel entitled Home Is the Place You Left.</p>
       - name: Alicia Norman-Butler
-        image:
-          src: https://placehold.co/3000x4000
-          alt: portrait of Alicia Norman-Butler
+        
         bio: >-
           <p>Shruti Belliappa is an art historian, advisor and theorist specialising in postwar and contemporary art. Since 2012, she has worked on strategic acquisitions and curating) for a global roster of clients, including three significant private art collections based in the US, Europe and Brazil, overseeing their transformation into museum quality collections. </p>
 

@@ -82,25 +82,25 @@ const mobileNavLinksHtml = navLinks
       x-show="menuOpen"
       x-cloak
       @keydown.escape.window="menuOpen = false"
-      x-transition:enter="mobile-nav-enter"
-      x-transition:enter-start="mobile-nav-from"
-      x-transition:enter-end="mobile-nav-to"
-      x-transition:leave="mobile-nav-leave"
-      x-transition:leave-start="mobile-nav-to"
-      x-transition:leave-end="mobile-nav-from"
+      x-transition:enter="mobileNav-enter"
+      x-transition:enter-start="mobileNav-from"
+      x-transition:enter-end="mobileNav-to"
+      x-transition:leave="mobileNav-leave"
+      x-transition:leave-start="mobileNav-to"
+      x-transition:leave-end="mobileNav-from"
       :class="{ 'is-open': menuShown }"
-      class="mobile-nav"
+      class="mobileNav"
     >
       <Container class="h-full">
-        <div class="mobile-nav-inner">
-          <Cluster class="mobile-nav-header" justify="between">
-            <a href="/" aria-label="Home" class="mobile-nav-logo">
+        <div class="mobileNav-inner">
+          <Cluster class="mobileNav-header" justify="between">
+            <a href="/" aria-label="Home" class="mobileNav-logo">
               <MonogramIcon />
             </a>
 
             <button
               x-ref="closeBtn"
-              class="mobile-nav-close"
+              class="mobileNav-close"
               @click="menuOpen = false"
               aria-label="Close navigation menu"
             >
@@ -186,13 +186,6 @@ const mobileNavLinksHtml = navLinks
       }
     }
 
-    /* svg {
-      width: 1.75rem;
-      height: 1.75rem;
-    } */
-
-    .menuToggle-icon {
-    }
     .menuToggle-monogram {
       opacity: 0;
       display: none;
@@ -206,30 +199,30 @@ const mobileNavLinksHtml = navLinks
 
 <style is:global>
   /* Transition helpers applied by Alpine x-transition */
-  .mobile-nav-enter {
+  .mobileNav-enter {
     transition:
       transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
       opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .mobile-nav-leave {
+  .mobileNav-leave {
     transition:
       transform 700ms cubic-bezier(0.4, 0, 0.2, 1),
       opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .mobile-nav-from {
+  .mobileNav-from {
     transform: translateY(-1.5rem);
     opacity: 0;
   }
 
-  .mobile-nav-to {
+  .mobileNav-to {
     transform: translateY(0);
     opacity: 1;
   }
 
   /* Full-screen overlay */
-  .mobile-nav {
+  .mobileNav {
     position: fixed;
     inset: 0;
     z-index: 200;
@@ -237,7 +230,7 @@ const mobileNavLinksHtml = navLinks
     overscroll-behavior: contain;
     top: 0;
 
-    .mobile-nav-inner {
+    .mobileNav-inner {
       display: flex;
       flex-direction: column;
       min-height: 100%;
@@ -246,23 +239,21 @@ const mobileNavLinksHtml = navLinks
     }
 
     /* Top bar — logo + close */
-    .mobile-nav-header {
+    .mobileNav-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
     }
 
-    .mobile-nav-logo {
+    .mobileNav-logo {
       display: block;
-      /* color: currentColor;
 
       svg {
-        height: 2.5rem;
-        width: auto;
-      } */
+        height: ruler.fluid(44, 53);
+      }
     }
 
-    .mobile-nav-close {
+    .mobileNav-close {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -271,6 +262,7 @@ const mobileNavLinksHtml = navLinks
       color: currentColor;
       cursor: pointer;
       padding: var(--space-2xs);
+      transition: opacity 300ms var(--easing);
 
       svg {
         width: 1.75rem;
@@ -288,38 +280,31 @@ const mobileNavLinksHtml = navLinks
       display: flex;
       align-items: flex-end;
       justify-content: flex-start;
-      /* padding-block: var(--space-xl); */
-
-      /* ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-      } */
 
       ul {
         transform: translateY(1.25rem);
-        transition: transform 1200ms var(--easing);
+        transition: transform 1800ms cubic-bezier(0.16, 1, 0.3, 1);
 
         &:hover {
-          :global(a) {
-            opacity: 0.4;
+          a:not(:hover) {
+            opacity: 0.4 !important;
           }
         }
       }
 
       li {
         opacity: 0;
-        transition: opacity 1000ms cubic-bezier(0.31, 0.97, 0.76, 0.99);
+        transform: translateY(1rem);
+        transition:
+          opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 1600ms cubic-bezier(0.22, 1, 0.36, 1);
         transition-delay: 0ms;
+        will-change: opacity, transform;
       }
 
       a {
         display: block;
         font-family: var(--font-family-heading);
-        /* font-weight: var(--font-weight-thin); */
-        /* font-size: 42px; */
         font-size: var(--font-size-3);
         line-height: var(--line-height-snug);
         letter-spacing: var(--letter-spacing-looser);
@@ -335,13 +320,14 @@ const mobileNavLinksHtml = navLinks
     }
   }
 
-  .mobile-nav.is-open .mobileNavLinks ul {
+  .mobileNav.is-open .mobileNavLinks ul {
     transform: translateY(0);
   }
 
-  .mobile-nav.is-open .mobileNavLinks li {
+  .mobileNav.is-open .mobileNavLinks li {
     opacity: 1;
-    transition-delay: calc(300ms + var(--stagger-index, 0) * 200ms);
+    transform: translateY(0);
+    transition-delay: calc(450ms + var(--stagger-index, 0) * 280ms);
   }
 
   header + .section {

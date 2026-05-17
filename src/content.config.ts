@@ -64,6 +64,31 @@ z.object({
 ).default([]),
 }),
 });
+const settings = defineCollection({
+  loader: file("./src/content/settings.json", {
+    parser: (text) => {
+      const items = JSON.parse(text) as Array<Record<string, unknown>>;
+      return items.map((item, i) => ({ id: String(i), ...item }));
+    },
+  }),
+  schema: ({ image }) =>
+    z.object({
+  organization: z.object({
+  legalName: z.string().optional(),
+  description: z.string().optional(),
+  foundingDate: z.string().optional(),
+  logo: image().optional(),
+  email: z.string().optional(),
+  telephone: z.string().optional(),
+  sameAs: z.array(z.string()).default([]),
+}).optional(),
+  service: z.object({
+  serviceType: z.string().default("Art Advisory"),
+  areaServed: z.string().default("Worldwide"),
+  knowsAbout: z.array(z.string()).default([]),
+}).optional(),
+}),
+});
 const redirects = defineCollection({
   loader: file("./src/content/redirects.json", {
     parser: (text) => {
@@ -78,4 +103,4 @@ const redirects = defineCollection({
 }),
 });
 
-export const collections = { pages, redirects };
+export const collections = { pages, settings, redirects };
