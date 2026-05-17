@@ -33,11 +33,11 @@ const {
 const Tag = as || (href ? "a" : "button");
 const isButton = Tag === "button";
 
-const classes = ["btn", `size-${size}`, variant, className];
+const classes = ["btn", `btn--${size}`, `btn--${variant}`, className];
 
-if (iconOnly) classes.push("icon-only");
-if (fullWidth === true) classes.push("block-all");
-if (fullWidth === "mobile-only") classes.push("block-mobile");
+if (iconOnly) classes.push("btn--iconOnly");
+if (fullWidth === true) classes.push("btn--blockAll");
+if (fullWidth === "mobile-only") classes.push("btn--blockMobile");
 
 const ariaLabel = ariaLabelProp ?? (iconOnly ? label : undefined);
 const buttonType = (isButton ? typeProp : undefined) as
@@ -150,7 +150,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* PRIMARY: white bg, dark text */
-    .btn.primary {
+    .btn.btn--primary {
       --button-bg: var(--color-white);
       --button-label: var(--color-neutral-950);
       --button-hover-bg: var(--color-neutral-950);
@@ -158,7 +158,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* SECONDARY: dark grey bg, white text */
-    .btn.secondary {
+    .btn.btn--secondary {
       --button-bg: var(--color-neutral-800);
       --button-label: var(--color-white);
       --button-hover-bg: var(--color-white);
@@ -166,7 +166,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* GHOST: transparent, subtle fill on hover */
-    .btn.ghost {
+    .btn.btn--ghost {
       --button-bg: transparent;
       --button-label: currentColor;
       --button-hover-bg: color-mix(in oklch, currentColor 8%, transparent);
@@ -175,7 +175,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* TEXT: no background, underline on hover */
-    .btn.text {
+    .btn.btn--text {
       --button-bg: transparent;
       --button-label: currentColor;
       --button-hover-label: currentColor;
@@ -196,21 +196,21 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* SIZES */
-    .size-sm {
+    .btn--sm {
       --button-font-size: var(--control-font-size-sm);
       --button-padding-inline: var(--control-padding-inline-sm);
       --button-padding-block: var(--control-padding-block-sm);
       --button-height: var(--control-height-sm);
     }
 
-    .size-md {
+    .btn--md {
       --button-font-size: var(--control-font-size-md);
       --button-padding-inline: var(--control-padding-inline-md);
       --button-padding-block: var(--control-padding-block-md);
       --button-height: var(--control-height-md);
     }
 
-    .size-lg {
+    .btn--lg {
       --button-font-size: var(--control-font-size-lg);
       --button-padding-inline: var(--control-padding-inline-lg);
       --button-padding-block: var(--control-padding-block-lg);
@@ -218,7 +218,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* ICON ONLY */
-    .btn.icon-only {
+    .btn.btn--iconOnly {
       aspect-ratio: 1 / 1;
 
       .btn-content {
@@ -228,7 +228,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
     }
 
     /* FULL WIDTH */
-    .btn.block-all {
+    .btn.btn--blockAll {
       display: flex;
       width: 100%;
 
@@ -237,7 +237,7 @@ const restProps = isButton ? { type: buttonType ?? "button", ...rest } : rest;
       }
     }
 
-    .btn.block-mobile {
+    .btn.btn--blockMobile {
       @media (--sm-down) {
         display: flex;
         width: 100%;
