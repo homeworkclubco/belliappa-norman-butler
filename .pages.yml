@@ -108,25 +108,7 @@ content:
         type: object
         fields:
           - { name: legalName, label: Legal name, type: string }
-          - { name: description, label: Description (used in JSON-LD & shareable AI summaries), type: text }
-          - { name: foundingDate, label: Founding date (YYYY or YYYY-MM-DD), type: string }
-          - { name: logo, label: Logo (square, for Google Knowledge Panel), type: image }
-          - { name: email, label: Contact email, type: string }
-          - { name: telephone, label: Phone (E.164, e.g. +44 20 1234 5678), type: string }
-          - name: sameAs
-            label: Social / profile URLs (Instagram, LinkedIn, press, etc.)
-            type: string
-            list: true
-      - name: service
-        label: Service
-        type: object
-        fields:
-          - { name: serviceType, label: Service type, type: string, default: "Art Advisory" }
-          - { name: areaServed, label: Area served, type: string, default: "Worldwide" }
-          - name: knowsAbout
-            label: Topics / specialisms
-            type: string
-            list: true
+
 
   - name: redirects
     label: Redirects
