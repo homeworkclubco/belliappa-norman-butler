@@ -60,9 +60,6 @@ importers:
       '@csstools/postcss-global-data':
         specifier: ^4.0.0
         version: 4.0.0(postcss@8.5.9)
-      '@kurto/pagescms-astro':
-        specifier: file:../../Downloads/Code & Dev/pagescms/packages/astro/
-        version: astro-pagescms@file:../../Downloads/Code & Dev/pagescms/packages/astro(astro@6.1.5(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
       astro-favicons:
         specifier: ^3.1.6
         version: 3.1.6(astro@6.1.5(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3))
@@ -1370,11 +1367,6 @@ packages:
 
   astro-pagescms@0.1.0:
     resolution: {integrity: sha512-bMCQF419qKrzc+Q9ao7drk3TuFn8tMAkN42YUyI00XJt5WaYsGOr0np8G8duWy0zyhwd12Mm1KQDP3DRJJpVKg==}
-    peerDependencies:
-      astro: '>=4.0.0'
-
-  astro-pagescms@file:../../Downloads/Code & Dev/pagescms/packages/astro:
-    resolution: {directory: ../../Downloads/Code & Dev/pagescms/packages/astro, type: directory}
     peerDependencies:
       astro: '>=4.0.0'
 
@@ -4107,12 +4099,6 @@ snapshots:
       - supports-color
 
   astro-pagescms@0.1.0(astro@6.1.5(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)):
-    dependencies:
-      astro: 6.1.5(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
-      lodash.mergewith: 4.6.2
-      yaml: 2.8.3
-
-  astro-pagescms@file:../../Downloads/Code & Dev/pagescms/packages/astro(astro@6.1.5(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)):
     dependencies:
       astro: 6.1.5(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.3)
       lodash.mergewith: 4.6.2
