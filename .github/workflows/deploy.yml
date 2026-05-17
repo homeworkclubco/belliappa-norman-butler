@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Astro site to Pages
 
 on:
   push:
@@ -26,8 +26,10 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      - run: pnpm exec astro build --site "${{ steps.pages.outputs.origin }}" --base "${{ steps.pages.outputs.base_path }}"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
