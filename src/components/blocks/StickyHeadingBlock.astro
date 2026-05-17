@@ -47,9 +47,14 @@ const { id, heading, body } = block;
     align-items: end;
     min-height: calc(100dvh - var(--header-height));
 
+    @media (--sm) {
+      padding-block-start: var(--space-xl);
+    }
+
     .layout {
       /* display: grid;
       gap: var(--space-lg); */
+      gap: var(--space-3xl);
     }
 
     .body-col :global(.prose) {
@@ -57,15 +62,6 @@ const { id, heading, body } = block;
     }
 
     @media (min-width: 768px) {
-      & {
-      }
-
-      .layout {
-        /* grid-template-columns: 1fr 1fr;
-        align-items: stretch;
-        min-height: inherit; */
-      }
-
       .heading-col {
         position: relative;
       }

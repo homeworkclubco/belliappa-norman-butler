@@ -1,12 +1,12 @@
 ---
 uuid: E29FB072-3042-45D4-B628-A903B30F1A24
-title: About
+title: Work
 seo:
-  title: About | Belliappa Norman-Butler Art Advisory
+  title: Work | Belliappa Norman-Butler Art Advisory
   description: Twenty years building museum-quality post-war and contemporary collections — connoisseurship, market intelligence and direct access to leading artists and studios.
 sections:
   - type: stickyHeadingBlock
-    heading: About
+    heading: Work
     body: >-
       <p>Belliappa Norman-Butler is a London-based art advisory with over twenty years of experience building exceptional post-war and contemporary art collections worldwide. The practice has contributed to some of the most compelling private collections internationally, combining strategic acquisition with long-term vision.</p>
       <p>Grounded in connoisseurship and driven by precise market intelligence, Belliappa Norman-Butler operates with dual expertise: an authoritative grasp of global market dynamics and deep art historical scholarship. This enables clients to acquire works of lasting significance — aesthetically, intellectually, and financially.</p>
