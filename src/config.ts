@@ -27,7 +27,7 @@ export type Site = {
 };
 
 export const SITE: Site = {
-  website: "https://bnb.art",
+  website: "https://homeworkclubco.github.io",
   author: "Belliappa Norman-Butler",
   seo: {
     title: "Belliappa Norman-Butler is a hybrid art advisory practice based in London with an exemplary global portfolio of collection building in post-war and contemporary art, with a hand in some of the world’s most compelling collections.",

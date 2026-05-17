@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.5.0",
-    "@astrojs/cloudflare": "^13.1.8",
     "@astrojs/sitemap": "^3.7.2",
     "@lucide/astro": "^1.8.0",
     "@tailwindcss/vite": "^4.1.13",
@@ -24,13 +23,12 @@
     "tailwindcss": "^4.1.13",
     "unist-util-visit": "^5.1.0",
     "unocss": "^66.6.8",
-    "vanilla-cookieconsent": "^3.1.0",
-    "wrangler": "^4.82.0"
+    "vanilla-cookieconsent": "^3.1.0"
   },
   "devDependencies": {
     "@csstools/postcss-color-mix-function": "^4.0.2",
     "@csstools/postcss-global-data": "^4.0.0",
-    "@kurto/pagescms-astro": "file:../../Downloads/Code & Dev/pagescms/packages/astro/",
+    "astro-pagescms": "^0.1.0",
     "astro-favicons": "^3.1.6",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",

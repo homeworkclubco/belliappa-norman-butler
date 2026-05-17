@@ -7,10 +7,9 @@ import UnoCSS from 'unocss/astro';
 import { SITE } from './src/config';
 import rehypeYoutubePlyr from './src/plugins/rehype-youtube-plyr.mjs';
 
-import cloudflare from '@astrojs/cloudflare';
 import redirectsData from './src/content/redirects.json';
 
-import pagesCMS from '@kurto/pagescms-astro';
+import pagesCMS from 'pagescms-astro';
 
 
 const redirects = Object.fromEntries(
@@ -23,8 +22,8 @@ const redirects = Object.fromEntries(
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  base: '/belliappa-norman-butler',
   redirects,
-  // TODO: update SITE.website in src/config.ts
 
   vite: {
     plugins: []
@@ -34,8 +33,5 @@ export default defineConfig({
     rehypePlugins: [rehypeYoutubePlyr],
   },
 
-  integrations: [UnoCSS(), sitemap(), alpinejs() , pagesCMS()],
-  adapter: cloudflare({
-      imageService: 'compile'
-  })
+  integrations: [UnoCSS(), sitemap(), alpinejs(), pagesCMS()],
 });
