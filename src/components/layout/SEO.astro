@@ -27,17 +27,15 @@ interface Props {
 const { title = SITE.seo.title, description = SITE.seo.description, ogImage } = Astro.props;
 
 // Resolve OG image to an absolute URL.
-// Priority: prop → SITE default (already absolute).
-let ogImageUrl: string = SITE.seo.image;
+// Priority: prop → SITE default.
+const resolved = ogImage ?? SITE.seo.image;
+let ogImageUrl: string;
 
-if (ogImage) {
-  if (typeof ogImage === "string") {
-    ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.site).href;
-  } else {
-    // ImageMetadata from Astro content — process and construct absolute URL.
-    const processed = await getImage({ src: ogImage, width: 1200, format: "webp" });
-    ogImageUrl = new URL(processed.src, Astro.site).href;
-  }
+if (typeof resolved === "string") {
+  ogImageUrl = resolved.startsWith("http") ? resolved : new URL(resolved, Astro.site).href;
+} else {
+  const processed = await getImage({ src: resolved, width: 1200, format: "webp" });
+  ogImageUrl = new URL(processed.src, Astro.site).href;
 }
 
 const { organization, localBusiness } = SITE.jsonld;

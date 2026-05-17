@@ -32,7 +32,7 @@ export const SITE: Site = {
   seo: {
     title: "Belliappa Norman-Butler is a hybrid art advisory practice based in London with an exemplary global portfolio of collection building in post-war and contemporary art, with a hand in some of the world’s most compelling collections.",
     description: "",
-    image: "https://example.com/og-image.png", // TODO: replace with actual default OG image
+    image: "/meta-share.png",
   },
   jsonld: {
     organization: {
