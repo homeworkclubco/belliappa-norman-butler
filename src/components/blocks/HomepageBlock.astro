@@ -11,7 +11,15 @@ import { Image } from "astro:assets";
   <Image src={heroRoseImage} alt="Hero Rose" class="rose" />
   <Image class="texture" src={canvasTextureImage} alt="" />
   <Container>
-    <FullLogo class="logo" data-reveal style="--reveal-delay: 200ms;" />
+    <button
+      type="button"
+      class="logoButton"
+      onclick="window.dispatchEvent(new CustomEvent('open-nav'))"
+      aria-controls="mobile-menu"
+      aria-label="Open navigation menu"
+    >
+      <FullLogo class="logo" data-reveal style="--reveal-delay: 200ms;" />
+    </button>
   </Container>
 </Section>
 
@@ -33,6 +41,15 @@ import { Image } from "astro:assets";
     object-fit: cover;
     opacity: 0.4;
     mix-blend-mode: multiply;
+  }
+
+  .logoButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    display: block;
   }
 
   .logo {
