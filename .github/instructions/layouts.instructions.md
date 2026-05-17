@@ -512,7 +512,7 @@ Color scheme switching (`light`/`dark`) is handled by `<Section colorScheme="dar
 ### Hero with full-height cover
 ```astro
 <Section padding="none">
-  <Container size="full">
+  <Container >
     <Cover minHeight="100svh">
       <Stack space="lg" align="center" text="center">
         <Heading as="h1" size="5">Headline</Heading>

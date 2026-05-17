@@ -21,8 +21,8 @@ const navLinks = [
 
 const mobileNavLinksHtml = navLinks
   .map(
-    link =>
-      `<li><a href="${link.href}" @click="menuOpen = false">${link.label}</a></li>`
+    (link, i) =>
+      `<li style="--stagger-index: ${navLinks.length - 1 - i}"><a href="${link.href}" @click="menuOpen = false">${link.label}</a></li>`
   )
   .join("");
 ---
@@ -32,6 +32,7 @@ const mobileNavLinksHtml = navLinks
   class="site-header"
   x-data="{
     menuOpen: false,
+    menuShown: false,
     isScrolled: false,
     syncScrollState() {
       this.isScrolled = window.scrollY > 100;
@@ -42,6 +43,11 @@ const mobileNavLinksHtml = navLinks
     init() {
       this.$watch('menuOpen', value => {
         document.body.style.overflow = value ? 'hidden' : '';
+        if (value) {
+          requestAnimationFrame(() => requestAnimationFrame(() => { this.menuShown = true; }));
+        } else {
+          this.menuShown = false;
+        }
       });
 
       this.syncScrollState();
@@ -56,7 +62,7 @@ const mobileNavLinksHtml = navLinks
 >
   {
     !hideTrigger && (
-      <Container size="full">
+      <Container>
         <Cluster justify="start" class="start">
           <MenuToggle initial={isHome ? "menu" : "monogram"} />
         </Cluster>
@@ -82,6 +88,7 @@ const mobileNavLinksHtml = navLinks
       x-transition:leave="mobile-nav-leave"
       x-transition:leave-start="mobile-nav-to"
       x-transition:leave-end="mobile-nav-from"
+      :class="{ 'is-open': menuShown }"
       class="mobile-nav"
     >
       <div class="mobile-nav-inner">
@@ -195,7 +202,7 @@ const mobileNavLinksHtml = navLinks
   }
 </style>
 
-<style>
+<style is:global>
   /* Transition helpers applied by Alpine x-transition */
   .mobile-nav-enter {
     transition:
@@ -290,6 +297,9 @@ const mobileNavLinksHtml = navLinks
       } */
 
       ul {
+        transform: translateY(1.25rem);
+        transition: transform 1200ms var(--easing);
+
         &:hover {
           :global(a) {
             opacity: 0.4;
@@ -297,7 +307,13 @@ const mobileNavLinksHtml = navLinks
         }
       }
 
-      :global(a) {
+      li {
+        opacity: 0;
+        transition: opacity 1000ms cubic-bezier(0.31, 0.97, 0.76, 0.99);
+        transition-delay: 0ms;
+      }
+
+      a {
         display: block;
         font-family: var(--font-family-heading);
         /* font-weight: var(--font-weight-thin); */
@@ -308,15 +324,25 @@ const mobileNavLinksHtml = navLinks
         text-transform: uppercase;
         color: currentColor;
         text-decoration: none;
-        transition: 0.5s all var(--ease);
-      }
-      :global(a:hover) {
-        opacity: 1 !important;
+        transition: 0.8s all var(--easing);
+
+        &:hover {
+          opacity: 1 !important;
+        }
       }
     }
   }
 
-  header + :global(.section) {
+  .mobile-nav.is-open .mobileNavLinks ul {
+    transform: translateY(0);
+  }
+
+  .mobile-nav.is-open .mobileNavLinks li {
+    opacity: 1;
+    transition-delay: calc(300ms + var(--stagger-index, 0) * 200ms);
+  }
+
+  header + .section {
     margin-top: var(--header-height);
   }
 </style>
