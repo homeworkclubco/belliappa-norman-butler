@@ -111,7 +111,7 @@ content:
           - { name: description, label: Description (used in JSON-LD & shareable AI summaries), type: text }
           - { name: foundingDate, label: Founding date (YYYY or YYYY-MM-DD), type: string }
           - { name: logo, label: Logo (square, for Google Knowledge Panel), type: image }
-          - { name: email, label: Contact email, type: string, options: { pattern: { regex: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", message: "Must be a valid email" } } }
+          - { name: email, label: Contact email, type: string }
           - { name: telephone, label: Phone (E.164, e.g. +44 20 1234 5678), type: string }
           - name: sameAs
             label: Social / profile URLs (Instagram, LinkedIn, press, etc.)
