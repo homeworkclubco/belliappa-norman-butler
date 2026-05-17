@@ -38,10 +38,11 @@ const { initial = "menu", class: className = "", ...rest } = Astro.props;
     cursor: pointer;
     position: relative;
     line-height: 0;
+    padding: 0;
 
     & :global(.menuToggle-icon) {
       /* height: var(--menu-toggle-size); */
-      height: ruler.fluid(40, 53);
+      height: ruler.fluid(44, 53);
       width: auto;
       transition:
         opacity 500ms var(--easing, ease),
