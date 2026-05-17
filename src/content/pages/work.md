@@ -2,8 +2,8 @@
 uuid: E29FB072-3042-45D4-B628-A903B30F1A24
 title: About
 seo:
-  title: About
-  description: Learn more about this site.
+  title: About | Belliappa Norman-Butler Art Advisory
+  description: Twenty years building museum-quality post-war and contemporary collections — connoisseurship, market intelligence and direct access to leading artists and studios.
 sections:
   - type: stickyHeadingBlock
     heading: About

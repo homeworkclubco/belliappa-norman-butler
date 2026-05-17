@@ -1,9 +1,9 @@
 ---
 uuid: E29FB072-3042-45D4-B628-A903B30F1A24
-title: Contact
+title: People
 seo:
-  title: About
-  description: Learn more about this site.
+  title: People | Belliappa Norman-Butler Art Advisory
+  description: Meet Shruti Belliappa and Alicia Norman-Butler — art historians and advisors with deep expertise in post-war, contemporary and emerging international art.
 sections:
   - type: peopleBlock
     heading: People

@@ -22,7 +22,7 @@ const redirects = Object.fromEntries(
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  base: process.env.NODE_ENV === 'production' ? '/belliappa-norman-butler' : '/',
+  base: '/',
   redirects,
 
   vite: {
