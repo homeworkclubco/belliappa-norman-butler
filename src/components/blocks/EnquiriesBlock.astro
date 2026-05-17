@@ -33,7 +33,7 @@ const { id, heading, lines = [] } = block;
       style="--reveal-delay: 0.15s;"
     >
       <p>
-        <a href="mailto:info@bnb.art">info@bnb.art</a>
+        <a href="mailto:info@bnb.art" class="underline">info@bnb.art</a>
       </p>
       <p>Viewings by appointment</p>
     </Stack>
@@ -43,7 +43,7 @@ const { id, heading, lines = [] } = block;
         <Heading
           as="h1"
           slot="bottom"
-          class="mx-auto text-center"
+          class="py-md mx-auto text-center"
           set:html={heading}
           data-reveal
           style="--reveal-delay: 0.3s;"

@@ -5,3 +5,19 @@
 @import './props';
 @import './utilities';
 @import './reveal.css';
+
+@layer utilities {
+  .underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.4s ease, background-position 0s;
+
+    &:hover,
+    &:focus-visible {
+      background-position: 0% 100%;
+      background-size: 100% 1px;
+    }
+  }
+}

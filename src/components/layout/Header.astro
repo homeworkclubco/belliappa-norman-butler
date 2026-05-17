@@ -11,6 +11,8 @@ interface Props {
 
 const { hideTrigger = false } = Astro.props;
 
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
+
 const navLinks = [
   { href: "/work", label: "Work" },
   { href: "/people", label: "People" },
@@ -56,7 +58,7 @@ const mobileNavLinksHtml = navLinks
     !hideTrigger && (
       <Container size="full">
         <Cluster justify="start" class="start">
-          <MenuToggle initial="menu" />
+          <MenuToggle initial={isHome ? "menu" : "monogram"} />
         </Cluster>
       </Container>
     )

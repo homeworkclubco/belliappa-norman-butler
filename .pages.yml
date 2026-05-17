@@ -4,6 +4,11 @@ media:
   output: ../../assets/uploads
 
 components:
+  image_with_alt:
+    type: object
+    fields:
+      - { name: src, label: Image, type: image }
+      - { name: alt, label: Alt text, type: string }
   seo:
     type: object
     label: SEO & social sharing
@@ -56,6 +61,21 @@ components:
             fields:
               - { name: text, label: Text, type: string }
               - { name: href, label: Link URL (optional — e.g. mailto:info@bnb.art), type: string }
+      - name: peopleBlock
+        label: People
+        fields:
+          - { name: id, label: Anchor ID, type: string }
+          - { name: heading, label: Fixed bottom-left heading (e.g. PEOPLE), type: string }
+          - name: people
+            label: People
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Name, type: string, required: true }
+              - name: image
+                label: Image (3:4)
+                component: image_with_alt
+              - { name: bio, label: Bio, type: rich-text }
 
 content:
   - name: pages

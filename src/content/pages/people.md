@@ -5,11 +5,27 @@ seo:
   title: About
   description: Learn more about this site.
 sections:
-  - type: stickyHeadingBlock
-    heading: About
-    body: >-
-      <p>Belliappa Norman-Butler is a London-based art advisory with over twenty years of experience building exceptional post-war and contemporary art collections worldwide. The practice has contributed to some of the most compelling private collections internationally, combining strategic acquisition with long-term vision.</p>
-      <p>Grounded in connoisseurship and driven by precise market intelligence, Belliappa Norman-Butler operates with dual expertise: an authoritative grasp of global market dynamics and deep art historical scholarship. This enables clients to acquire works of lasting significance — aesthetically, intellectually, and financially.</p>
-      <p>The advisory works closely with leading artists and studios to secure primary-market access, facilitate direct commissions, and realise site-specific projects. Through a considered integration of art, architecture, and design, collections are developed with coherence and distinction.</p>
-      <p>Each engagement is tailored to the collector, aligning ambition with opportunity and ensuring that every acquisition strengthens the integrity and future legacy of the collection.</p>
+  - type: peopleBlock
+    heading: People
+    people:
+      - name: Shruti Belliappa
+        image:
+          src: https://placehold.co/3000x4000
+          alt: portrait of Shruti Belliappa
+        bio: >-
+          <p>Shruti Belliappa is an art historian, advisor and theorist specialising in postwar and contemporary art. Since 2012, she has worked on strategic acquisitions and curating) for a global roster of clients, including three significant private art collections based in the US, Europe and Brazil, overseeing their transformation into museum quality collections. </p>
+
+          <p>From 2021, she is also the Founding Editor and Publisher of Hanuman Editions, writings by a transnational artistic and literary avant-garde orienting from the legendary and cult 20th century series, Hanuman Books, published between southern India and New York City during the pivotal cultural era of the Vietnam War, the AIDS crisis and the end of the Cold War. Since its inception, Hanuman Editions has gone on to become a globally distributed small press, publishing cutting-edge content with a staunch following worldwide.collectors in Brazil, NY etc</p>
+
+          <p>In the lull of the pandemic, she began her doctoral research at the Visual Cultures department at Goldsmiths College London interrogating borders, artificial life, and the technologies of belonging. At present, she is writing up her thesis conclusions. As a devotee of the written word as much as the visual arts, her long term projects include Notes on Grief, a book of non-fiction and a novel entitled Home Is the Place You Left.</p>
+      - name: Alicia Norman-Butler
+        image:
+          src: https://placehold.co/3000x4000
+          alt: portrait of Alicia Norman-Butler
+        bio: >-
+          <p>Shruti Belliappa is an art historian, advisor and theorist specialising in postwar and contemporary art. Since 2012, she has worked on strategic acquisitions and curating) for a global roster of clients, including three significant private art collections based in the US, Europe and Brazil, overseeing their transformation into museum quality collections. </p>
+
+          <p>From 2021, she is also the Founding Editor and Publisher of Hanuman Editions, writings by a transnational artistic and literary avant-garde orienting from the legendary and cult 20th century series, Hanuman Books, published between southern India and New York City during the pivotal cultural era of the Vietnam War, the AIDS crisis and the end of the Cold War. Since its inception, Hanuman Editions has gone on to become a globally distributed small press, publishing cutting-edge content with a staunch following worldwide.collectors in Brazil, NY etc</p>
+
+          <p>In the lull of the pandemic, she began her doctoral research at the Visual Cultures department at Goldsmiths College London interrogating borders, artificial life, and the technologies of belonging. At present, she is writing up her thesis conclusions. As a devotee of the written word as much as the visual arts, her long term projects include Notes on Grief, a book of non-fiction and a novel entitled Home Is the Place You Left.</p>
 ---

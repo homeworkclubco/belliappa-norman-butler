@@ -13,10 +13,35 @@ const { class: className, id, ...rest } = Astro.props;
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   {...rest}
-  ><path
-    d="M8 15.5H40M8 26H40M8 36.5H40"
+>
+  <line
+    class="menuIcon-line menuIcon-line--top"
+    x1="8"
+    y1="15.5"
+    x2="40"
+    y2="15.5"
     stroke="currentcolor"
     stroke-width="2.25"
     stroke-linecap="square"
-    stroke-linejoin="round"></path>
+  ></line>
+  <line
+    class="menuIcon-line menuIcon-line--mid"
+    x1="8"
+    y1="26"
+    x2="40"
+    y2="26"
+    stroke="currentcolor"
+    stroke-width="2.25"
+    stroke-linecap="square"
+  ></line>
+  <line
+    class="menuIcon-line menuIcon-line--bot"
+    x1="8"
+    y1="36.5"
+    x2="40"
+    y2="36.5"
+    stroke="currentcolor"
+    stroke-width="2.25"
+    stroke-linecap="square"
+  ></line>
 </svg>

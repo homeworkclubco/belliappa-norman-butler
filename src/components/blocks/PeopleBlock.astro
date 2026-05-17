@@ -1,0 +1,148 @@
+---
+import Heading from "@components/display/Heading.astro";
+import Prose from "@components/display/Prose.astro";
+import Container from "@components/layout/Container.astro";
+import Frame from "@components/layout/Frame.astro";
+import Section from "@components/layout/Section.astro";
+import Stack from "@components/layout/Stack.astro";
+import { Image } from "astro:assets";
+import type { InferEntrySchema } from "astro:content";
+
+type Section_ = NonNullable<InferEntrySchema<"pages">["sections"]>[number];
+
+interface Props {
+  block: Extract<Section_, { type: "peopleBlock" }>;
+  index: number;
+}
+
+const { block } = Astro.props;
+const { id, heading, people = [] } = block;
+---
+
+<Section id={id} class="PeopleBlock" padding="xl">
+  <Container size="full">
+    <div class="people-layout">
+      {
+        heading && (
+          <div class="heading-pin">
+            <Heading as="h2" set:html={heading} data-reveal />
+          </div>
+        )
+      }
+
+      <Stack space="3xl-5xl" class="people-list">
+        {
+          people.map(person => (
+            <div class="person">
+              <Heading
+                as="h3"
+                size="2"
+                set:html={person.name}
+                class="person-mobileHeading"
+                data-reveal
+                style="--reveal-delay: 0.15s;"
+              />
+              {person.image?.src && (
+                <Frame ratio="3/4" class="person-image">
+                  <Image
+                    src={person.image.src as string}
+                    alt={person.image.alt ?? person.name}
+                    width={650}
+                    height={865}
+                  />
+                </Frame>
+              )}
+              <Stack space="lg" class="person-body">
+                <Heading
+                  as="h3"
+                  size="2"
+                  set:html={person.name}
+                  class="person-desktopHeading"
+                />
+                {person.bio && (
+                  <Prose>
+                    <Fragment set:html={person.bio} />
+                  </Prose>
+                )}
+              </Stack>
+            </div>
+          ))
+        }
+      </Stack>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .PeopleBlock {
+    .people-layout {
+      position: relative;
+    }
+
+    .heading-pin {
+      position: fixed;
+      bottom: var(--space-md);
+      top: auto;
+      align-self: end;
+      z-index: 1;
+      pointer-events: none;
+      /* mix-blend-mode: difference; */
+      /* TODO: refine — sits fixed at bottom-left of block, overlaps images on scroll */
+      @media (--sm) {
+        position: static;
+        margin-bottom: var(--space-3xl);
+      }
+    }
+
+    .heading-pin :global(*) {
+      pointer-events: auto;
+    }
+
+    .person {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: var(--space-lg-6xl);
+
+      @media (--md) {
+        gap: var(--space-3xl);
+      }
+
+      @media (--sm) {
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+    }
+
+    .person-mobileHeading {
+      display: none;
+
+      @media (--sm) {
+        display: block;
+      }
+    }
+
+    .person-desktopHeading {
+      display: block;
+
+      @media (--sm) {
+        display: none;
+      }
+    }
+
+    .person-image {
+      flex-shrink: 0;
+      /* width: ruler.fluid(120, 200); */
+      max-width: 650px;
+      flex-basis: 40%;
+
+      @media (--sm) {
+        width: calc(100vw);
+        margin-left: calc(var(--container-padding) * -1);
+        max-width: unset;
+      }
+    }
+
+    /* TODO: refine final styling */
+  }
+</style>

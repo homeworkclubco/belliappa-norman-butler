@@ -47,6 +47,19 @@ z.object({
   href: z.string().optional(),
 })).default([]),
 }),
+z.object({
+  type: z.literal("peopleBlock"),
+  id: z.string().optional(),
+  heading: z.string().optional(),
+  people: z.array(z.object({
+  name: z.string(),
+  image: z.object({
+  src: image().or(z.string()).optional(),
+  alt: z.string().optional(),
+}).optional(),
+  bio: z.string().optional(),
+})).default([]),
+}),
 ])
 ).default([]),
 }),
