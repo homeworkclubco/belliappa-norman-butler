@@ -17,13 +17,11 @@ import { Image } from "astro:assets";
 
 <style>
   .HomepageBlock {
-    min-block-size: 100lvh;
-    margin-block-start: calc(var(--header-height) * -1);
+    min-block-size: calc(100dvh - var(--header-height));
     display: flex;
     align-items: end;
-    padding-block-start: calc(var(--header-height) + var(--space-md));
-    padding-block-end: var(--space-md);
-    position: relative;
+    padding-block: var(--space-md);
+    /* position: relative; */
     overflow: hidden;
   }
 
