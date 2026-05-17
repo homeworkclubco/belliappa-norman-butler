@@ -5,7 +5,7 @@ module.exports = {
     require("@csstools/postcss-color-mix-function"),
     require("postcss-ruler")({
       minWidth: 375,
-      maxWidth: 1760,
+      maxWidth: 1920,
       generateAllCrossPairs: true,
     }),
     require("@csstools/postcss-global-data")({
