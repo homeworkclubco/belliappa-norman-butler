@@ -93,7 +93,7 @@ const { initial = "menu", class: className = "", ...rest } = Astro.props;
     &:hover :global(.menuIconLine--top) {
       transform: scaleX(1);
     }
-    :hover :global(.menuIconLine--mid) {
+    &:hover :global(.menuIconLine--mid) {
       transform: scaleX(0.72);
     }
     &:hover :global(.menuIconLine--bot) {
