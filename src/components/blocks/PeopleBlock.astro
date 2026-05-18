@@ -128,6 +128,7 @@ const personGraph = {
 <style>
   .PeopleBlock {
     padding-block-start: calc(var(--space-xl) + var(--header-height));
+    padding-block-end: var(--space-3xl);
 
     .heading-pin {
       position: fixed;
@@ -137,10 +138,10 @@ const personGraph = {
       z-index: 1;
       pointer-events: none;
       /* mix-blend-mode: difference; */
-      /* TODO: refine — sits fixed at bottom-left of block, overlaps images on scroll */
+
       @media (--sm) {
-        position: static;
-        margin-bottom: var(--space-3xl);
+        /* position: static;
+        margin-bottom: var(--space-3xl); */
       }
     }
 

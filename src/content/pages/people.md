@@ -9,7 +9,9 @@ sections:
     heading: People
     people:
       - name: Shruti Belliappa
-        
+        image:
+          src: https://placehold.co/3000x4000
+          alt: Portrait of Shruti Belliappa
         bio: >-
           <p>Shruti Belliappa is an art historian, advisor and theorist specialising in postwar and contemporary art. Since 2012, she has worked on strategic acquisitions and curating) for a global roster of clients, including three significant private art collections based in the US, Europe and Brazil, overseeing their transformation into museum quality collections. </p>
 

@@ -41,10 +41,17 @@ const mobileNavLinksHtml = navLinks
       document.documentElement.style.setProperty('--header-height', this.$el.offsetHeight + 'px');
     },
     init() {
+      let pendingShow = null;
+      const cancelPending = () => {
+        if (pendingShow !== null) { cancelAnimationFrame(pendingShow); pendingShow = null; }
+      };
       this.$watch('menuOpen', value => {
         document.body.style.overflow = value ? 'hidden' : '';
+        cancelPending();
         if (value) {
-          requestAnimationFrame(() => requestAnimationFrame(() => { this.menuShown = true; }));
+          pendingShow = requestAnimationFrame(() => {
+            pendingShow = requestAnimationFrame(() => { this.menuShown = true; pendingShow = null; });
+          });
         } else {
           this.menuShown = false;
         }
@@ -63,9 +70,11 @@ const mobileNavLinksHtml = navLinks
   {
     !hideTrigger && (
       <Container>
-        <Cluster justify="start" class="start">
-          <MenuToggle initial={isHome ? "menu" : "monogram"} />
+        <Cluster justify="between" class="start">
+          {/* <MenuToggle initial={isHome ? "menu" : "monogram"} /> */}
+          <MenuToggle initial={"menu"} />
         </Cluster>
+        {!isHome && <MenuToggle initial={"monogram"} />}
       </Container>
     )
   }

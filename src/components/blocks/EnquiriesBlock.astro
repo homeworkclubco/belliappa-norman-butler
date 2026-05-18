@@ -1,7 +1,6 @@
 ---
 import Heading from "@components/display/Heading.astro";
 import Cover from "@components/layout/Cover.astro";
-import MenuToggle from "@components/layout/MenuToggle.astro";
 import Section from "@components/layout/Section.astro";
 import Stack from "@components/layout/Stack.astro";
 import type { InferEntrySchema } from "astro:content";
@@ -18,9 +17,9 @@ const { id, heading, lines = [] } = block;
 ---
 
 <Section id={id} class="EnquiriesBlock" padding="none">
-  <Cover minHeight="100dvh" space="lg">
+  <Cover minHeight="calc(100dvh - var(--header-height))" space="lg">
     <div slot="top" class="enquiries-trigger-wrap" data-reveal>
-      <MenuToggle initial="monogram" />
+      <!-- <MenuToggle initial="monogram" /> -->
     </div>
 
     <Stack
@@ -32,10 +31,13 @@ const { id, heading, lines = [] } = block;
       data-reveal
       style="--reveal-delay: 0.15s;"
     >
-      <p>
-        <a href="mailto:info@bnb.art" class="underline">info@bnb.art</a>
+      <p class="enquiries-line--large">
+        <a href="mailto:enquiries@bnb.art" class="underline">
+          enquiries<span class="at-symbol">@</span>bnb.art
+        </a>
       </p>
       <p>Viewings by appointment</p>
+      <p>London, W11</p>
     </Stack>
 
     {
@@ -74,6 +76,11 @@ const { id, heading, lines = [] } = block;
       letter-spacing: var(--letter-spacing-loosest);
     }
 
+    .enquiries-line--large {
+      font-size: var(--font-size-2);
+      margin-bottom: var(--space-sm);
+    }
+
     :global(a) {
       color: currentColor;
       text-decoration: none;
@@ -83,5 +90,9 @@ const { id, heading, lines = [] } = block;
       }
     }
   }
-  /* TODO: refine type sizes / spacing once content is in */
+
+  .at-symbol {
+    display: inline-block;
+    transform: translateY(-0.15em);
+  }
 </style>
