@@ -165,5 +165,9 @@
     &[data-bg-alt] {
       background-color: var(--color-bg-alt);
     }
+
+    &[data-bg-transparent] {
+      background-color: transparent;
+    }
   }
 }

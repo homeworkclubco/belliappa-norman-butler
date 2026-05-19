@@ -71,10 +71,13 @@ const mobileNavLinksHtml = navLinks
     !hideTrigger && (
       <Container>
         <Cluster justify="between" class="start">
-          {/* <MenuToggle initial={isHome ? "menu" : "monogram"} /> */}
-          <MenuToggle initial={"menu"} />
+          {isHome && <MenuToggle initial={"menu"} />}
         </Cluster>
-        {!isHome && <MenuToggle initial={"monogram"} />}
+        <div class="center" />
+        <Cluster justify="end">
+          {/* <MenuToggle initial={isHome ? "menu" : "monogram"} /> */}
+          {!isHome && <MenuToggle initial={"monogram"} />}
+        </Cluster>
       </Container>
     )
   }

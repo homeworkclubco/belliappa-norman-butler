@@ -32,7 +32,12 @@ const { id, heading, lines = [] } = block;
       style="--reveal-delay: 0.15s;"
     >
       <p class="enquiries-line--large">
-        <a href="mailto:enquiries@bnb.art" class="underline">
+        <a
+          href="mailto:enquiries@bnb.art"
+          class="underline"
+          target="_blank"
+          title="Send an email to Belliappa Norman-Butler"
+        >
           enquiries<span class="at-symbol">@</span>bnb.art
         </a>
       </p>
@@ -45,7 +50,7 @@ const { id, heading, lines = [] } = block;
         <Heading
           as="h1"
           slot="bottom"
-          class="py-md mx-auto text-center"
+          class="py-md sr-only mx-auto text-center"
           set:html={heading}
           data-reveal
           style="--reveal-delay: 0.3s;"
@@ -77,8 +82,8 @@ const { id, heading, lines = [] } = block;
     }
 
     .enquiries-line--large {
-      font-size: var(--font-size-2);
-      margin-bottom: var(--space-sm);
+      /* font-size: var(--font-size-2);
+      margin-bottom: var(--space-sm); */
     }
 
     :global(a) {

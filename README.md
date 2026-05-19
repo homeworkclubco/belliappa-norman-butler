@@ -29,21 +29,21 @@ Website for **Belliappa Norman-Butler**, a London-based hybrid art advisory prac
 │   │   └── uploads/            # CMS-uploaded images
 │   ├── components/
 │   │   ├── actions/            # Buttons, action links
-│   │   ├── blocks/             # Page-section blocks (hero, grids, etc.)
+│   │   ├── blocks/             # Page-section blocks
 │   │   ├── display/            # Heading, Prose, OverlapHeading
 │   │   ├── forms/              # Input, Textarea, Checkbox, Field
-│   │   └── layout/             # Every Layout primitives (Stack, Cluster, Grid, etc.)
+│   │   └── layout/             # Layout primitives (Stack, Cluster, Grid, etc.)
 │   ├── content/
 │   │   ├── pages/              # Static pages (homepage.md, contact.md, people.md, work.md)
-│   │   ├── redirects.json      # Static redirects consumed by astro.config.mjs
+│   │   ├── redirects.json      # Static redirects
 │   │   └── settings.json       # Site settings (organisation info, SEO defaults)
 │   ├── layouts/
 │   │   └── Layout.astro        # Root layout (SEO, header, footer, cookie consent)
 │   ├── pages/
-│   │   ├── index.astro         # Homepage (renders homepage.md)
+│   │   ├── index.astro         # Homepage
 │   │   └── [...slug].astro     # Generic page route
 │   ├── plugins/
-│   │   └── rehype-youtube-plyr.mjs   # Transforms bare YouTube URLs into Plyr embeds
+│   │   └── rehype-youtube-plyr.mjs
 │   └── styles/                 # CSS layers, tokens, typography, colours
 ├── public/                     # Static public assets
 ├── .pages.yml                  # Pages CMS configuration
@@ -52,24 +52,13 @@ Website for **Belliappa Norman-Butler**, a London-based hybrid art advisory prac
 └── postcss.config.cjs          # PostCSS pipeline
 ```
 
-## Content Architecture
+## Content Management
 
-Pages are managed through **Pages CMS**, which edits Markdown and JSON files directly in the repository. Each page has:
+Content is managed through **Pages CMS**, which edits files directly in this repository. The CMS is configured in `.pages.yml`.
 
-- `title` — internal reference
-- `slug` — URL path (e.g. `contact`, `people`)
-- `seo` — title, description, social share image
-- `sections` — array of block types that build the page layout
+Pages live in `src/content/pages/` as Markdown files with YAML frontmatter. Each page defines its `title`, `slug`, `seo` metadata, and an array of `sections` (blocks) that build the page layout.
 
-### Available Blocks
-
-| Block | Purpose |
-|---|---|
-| `homepageBlock` | Full-screen homepage hero |
-| `textBlock` | Standard text section with heading and body |
-| `stickyHeadingBlock` | Text section with sticky heading behaviour |
-| `enquiriesBlock` | Centered monogram + contact lines (e.g. email, phone) |
-| `peopleBlock` | Team grid with portraits and bios |
+`src/content.config.ts` is **auto-generated** from `.pages.yml` — do not edit it manually.
 
 ## Commands
 
@@ -89,12 +78,6 @@ All commands are run from the root of the project:
 - **Fluid typography & spacing** — scales interpolate between mobile (375px) and desktop (1760px)
 - **Semantic colour tokens** — `var(--color-bg)`, `var(--color-foreground)`, `var(--color-accent)` (#e6372e), etc.
 - **Never use raw values** — always reference design tokens for colours, spacing, and typography
-
-## Adding a New Page Section Block
-
-1. **`.pages.yml`** — Add a new block definition under `components → sections → blocks`
-2. **`src/content.config.ts`** — Add a matching Zod schema variant to the `sections` discriminated union
-3. **`src/components/blocks/`** — Create a new `.astro` component. `BlockRenderer` auto-discovers it via `import.meta.glob`
 
 ## Path Aliases
 
