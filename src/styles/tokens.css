@@ -21,6 +21,9 @@
     /* Default radius */
     --radius: var(--radius-sm);
 
+    /* Initial header height, refined at runtime by Header.astro after Alpine init */
+    --header-height: 5rem;
+
     /* ------------------------------
     1. PRIMITIVES 
     ------------------------------ */

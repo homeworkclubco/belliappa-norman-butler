@@ -8,8 +8,20 @@ import { Image } from "astro:assets";
 ---
 
 <Section class="HomepageBlock" padding="0" colorScheme="light">
-  <Image src={heroRoseImage} alt="Hero Rose" class="rose" />
-  <Image class="texture" src={canvasTextureImage} alt="" />
+  <Image
+    src={heroRoseImage}
+    alt="Hero Rose"
+    class="rose"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <Image
+    class="texture"
+    src={canvasTextureImage}
+    alt=""
+    loading="eager"
+    fetchpriority="high"
+  />
   <Container>
     <button
       type="button"
@@ -18,7 +30,7 @@ import { Image } from "astro:assets";
       aria-controls="mobile-menu"
       aria-label="Open navigation menu"
     >
-      <FullLogo class="logo" data-reveal style="--reveal-delay: 200ms;" />
+      <FullLogo class="logo" data-reveal style="--reveal-delay: 500ms;" />
     </button>
   </Container>
 </Section>
