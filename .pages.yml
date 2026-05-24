@@ -76,8 +76,36 @@ components:
                 label: Image (3:4)
                 component: image_with_alt
               - { name: bio, label: Bio, type: rich-text }
+      - name: pressBlock
+        label: Press (grid of press items)
+        fields:
+          - { name: id, label: Anchor ID, type: string }
+          - { name: heading, label: Heading (optional), type: string }
 
 content:
+  - name: press
+    label: Press
+    type: collection
+    path: src/content/press
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      fields: [image, title, source, date]
+      sort: [date, title, source]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: source, label: Source (e.g. The Times), type: string, required: true }
+      - { name: date, label: Date, type: date, required: true }
+      - name: image
+        label: Image
+        component: image_with_alt
+      - { name: description, label: Short description, type: text }
+      - { name: link, label: Link to external press, type: string, required: true }
+
   - name: pages
     label: Pages
     type: collection
@@ -103,6 +131,13 @@ content:
     path: src/content/settings.json
     format: json
     fields:
+      - name: navLinks
+        label: Header navigation links
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string, required: true }
+          - { name: href, label: URL (e.g. /work or https://example.com), type: string, required: true }
       - name: organization
         label: Organisation
         type: object

@@ -1,5 +1,6 @@
 ---
 import MonogramIcon from "@components/svg/MonogramIcon.astro";
+import settings from "../../content/settings.json";
 import Cluster from "./Cluster.astro";
 import Container from "./Container.astro";
 import MenuToggle from "./MenuToggle.astro";
@@ -13,11 +14,7 @@ const { hideTrigger = false } = Astro.props;
 
 const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
 
-const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/people", label: "People" },
-  { href: "/contact", label: "Enquiries" },
-];
+const navLinks = settings.navLinks ?? [];
 
 const mobileNavLinksHtml = navLinks
   .map(

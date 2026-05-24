@@ -91,7 +91,7 @@ const personGraph = {
               />
               {person.image?.src && (
                 <Frame
-                  ratio="3/4"
+                  ratio="1/1"
                   class="person-image"
                   data-reveal
                   style="--reveal-delay: 0.3s;"
@@ -100,7 +100,7 @@ const personGraph = {
                     src={person.image.src as string}
                     alt={person.image.alt ?? person.name}
                     width={650}
-                    height={865}
+                    height={650}
                   />
                 </Frame>
               )}
@@ -184,13 +184,13 @@ const personGraph = {
     .person-image {
       /* flex-shrink: 0; */
       /* width: ruler.fluid(120, 200); */
-      /* max-width: 650px; */
+      max-width: 650px;
       /* flex-basis: 50%; */
 
       @media (--sm) {
-        width: calc(100vw);
-        margin-left: calc(var(--container-padding) * -1);
-        max-width: unset;
+        /* width: calc(100vw); */
+        /* margin-left: calc(var(--container-padding) * -1); */
+        max-width: 65ch;
       }
     }
 

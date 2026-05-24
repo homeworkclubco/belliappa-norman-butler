@@ -7,6 +7,21 @@ import type { SchemaContext } from 'astro:content';
 import { defineCollection } from 'astro:content';
 
 // Collections
+const press = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/press" }),
+  schema: ({ image }) =>
+    z.object({
+  title: z.string(),
+  source: z.string(),
+  date: z.string(),
+  image: z.object({
+  src: image().or(z.string()).optional(),
+  alt: z.string().optional(),
+}).optional(),
+  description: z.string().optional(),
+  link: z.string(),
+}),
+});
 const pages = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/pages" }),
   schema: ({ image }) =>
@@ -60,6 +75,11 @@ z.object({
   bio: z.string().optional(),
 })).default([]),
 }),
+z.object({
+  type: z.literal("pressBlock"),
+  id: z.string().optional(),
+  heading: z.string().optional(),
+}),
 ])
 ).default([]),
 }),
@@ -67,12 +87,16 @@ z.object({
 const settings = defineCollection({
   loader: file("./src/content/settings.json", {
     parser: (text) => {
-      const items = JSON.parse(text) as Array<Record<string, unknown>>;
-      return items.map((item, i) => ({ id: String(i), ...item }));
+      const data = JSON.parse(text) as Record<string, unknown>;
+      return [{ id: "settings", ...data }];
     },
   }),
   schema: ({ image }) =>
     z.object({
+  navLinks: z.array(z.object({
+  label: z.string(),
+  href: z.string(),
+})).default([]),
   organization: z.object({
   legalName: z.string().optional(),
   description: z.string().optional(),
@@ -103,4 +127,4 @@ const redirects = defineCollection({
 }),
 });
 
-export const collections = { pages, settings, redirects };
+export const collections = { press, pages, settings, redirects };

@@ -8,8 +8,7 @@ sections:
   - type: stickyHeadingBlock
     heading: Work
     body: >-
-      <p>Belliappa Norman-Butler is a London-based art advisory with over twenty years of experience building exceptional post-war and contemporary art collections worldwide. The practice has contributed to some of the most compelling private collections internationally, combining strategic acquisition with long-term vision.</p>
-      <p>Grounded in connoisseurship and driven by precise market intelligence, Belliappa Norman-Butler operates with dual expertise: an authoritative grasp of global market dynamics and deep art historical scholarship. This enables clients to acquire works of lasting significance — aesthetically, intellectually, and financially.</p>
-      <p>The advisory works closely with leading artists and studios to secure primary-market access, facilitate direct commissions, and realise site-specific projects. Through a considered integration of art, architecture, and design, collections are developed with coherence and distinction.</p>
-      <p>Each engagement is tailored to the collector, aligning ambition with opportunity and ensuring that every acquisition strengthens the integrity and future legacy of the collection.</p>
+      <p>Belliappa Norman-Butler is an art advisory and private dealership based in London with over twenty years of expertise in building exceptional post-war and contemporary art collections. Founded on world-class research, deep art historical scholarship and an authoritative grasp of global art markets, the advisory has a hand in some of the most compelling private art collections worldwide. </p>
+      <p>Working closely with a network of leading galleries, artists’ studios and private collectors to secure access to exceptional and rare to market artworks, Belliappa Norman-Butler also realises site-specific projects and bespoke commissions through a considered crossover of art, architecture, and design.</p>
+      <p>At a pivotal moment in an evolving art ecosystem, where artists are defining fresh territories of agency and production, the advisory partners with artists advising across relationships with galleries, institutions and collectors; from conceptual and market strategies to publishing and legacy planning. </p>
 ---

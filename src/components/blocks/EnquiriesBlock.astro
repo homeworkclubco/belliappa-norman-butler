@@ -58,6 +58,11 @@ const { id, heading, lines = [] } = block;
       )
     }
   </Cover>
+
+  <p class="credit">
+    Homepage image copyright Jannis Kounellis, Rosa Nera(detail) c. 1965/66. In
+    admiration.
+  </p>
 </Section>
 
 <style>
@@ -99,5 +104,12 @@ const { id, heading, lines = [] } = block;
   .at-symbol {
     display: inline-block;
     transform: translateY(-0.15em);
+  }
+
+  .credit {
+    font-size: var(--font-size--1);
+    position: absolute;
+    bottom: var(--space-md);
+    right: var(--container-padding);
   }
 </style>

@@ -1,10 +1,15 @@
 {
+  "navLinks": [
+    { "label": "Work", "href": "/work" },
+    { "label": "People", "href": "/people" },
+    { "label": "Enquiries", "href": "/contact" }
+  ],
   "organization": {
     "legalName": "Belliappa Norman-Butler",
     "description": "Belliappa Norman-Butler is a hybrid art advisory practice based in Notting Hill, London, building distinguished post-war and contemporary collections worldwide.",
     "foundingDate": "2026",
     "logo": "",
-    "email": "info@bnb.art",
+    "email": "enquiries@bnb.art",
     "telephone": "",
     "sameAs": []
   },
