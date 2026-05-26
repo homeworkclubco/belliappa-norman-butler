@@ -27,8 +27,8 @@ sections:
           scope of their work and introducing it to site specific and
           intellectual contexts. Having frequently collaborated with the
           American artist Raymond Pettibon both in publishing and on major
-          private commissions, she is currently the creative director and
-          commercial advisor for his art practice.</p><p>As a proponent of the
+          private commissions, she is currently the Creative director and
+          Commercial Advisor for his art practice.</p><p>A proponent of the
           historic crossovers of literature and the visual arts, she is also the
           Founding Editor and Publisher of Hanuman Editions, writings by a
           transnational artistic and literary avant-garde, orienting from the
