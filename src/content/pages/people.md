@@ -40,7 +40,7 @@ sections:
         image:
           alt: Portrait of Alicia Norman-Butler
         bio: <p>Alicia Norman-Butler has spent nearly two decades at the forefront of
-          the post-war and contemporary art market, holding key positions at
+          the post-war and contemporary art market, holding positions at
           Christie’s and Hauser &amp; Wirth in London, and Magazzino d’Arte
           Moderna in Rome. Before co-founding the advisory, she was a partner at
           the London-based private art dealership, Lindon &amp; Co.</p><p>Alicia
