@@ -42,13 +42,13 @@ components:
         fields:
           - { name: id, label: Anchor ID, type: string }
           - { name: heading, label: Heading, type: string }
-          - { name: body, label: Body, type: rich-text }
+          - { name: body, label: Body, type: rich-text, options: { format: html } }
       - name: stickyHeadingBlock
         label: Sticky Heading Block
         fields:
           - { name: id, label: Anchor ID, type: string }
           - { name: heading, label: Heading, type: string }
-          - { name: body, label: Body, type: rich-text }
+          - { name: body, label: Body, type: rich-text, options: { format: html } }
       - name: enquiriesBlock
         label: Enquiries (centered monogram + wordmark)
         fields:
@@ -75,7 +75,7 @@ components:
               - name: image
                 label: Image (3:4)
                 component: image_with_alt
-              - { name: bio, label: Bio, type: rich-text }
+              - { name: bio, label: Bio, type: rich-text, options: { format: html } }
       - name: pressBlock
         label: Press (grid of press items)
         fields:
