@@ -61,7 +61,7 @@ const personGraph = {
 <script type="application/ld+json" set:html={JSON.stringify(personGraph)} />
 
 <Section id={id} class="PeopleBlock" padding="xl">
-  <Container>
+  <Container size="wide">
     <div class="relative">
       {
         heading && (
@@ -185,7 +185,7 @@ const personGraph = {
       /* flex-shrink: 0; */
       /* width: ruler.fluid(120, 200); */
       max-width: 650px;
-      /* flex-basis: 50%; */
+      flex-basis: 50%;
 
       @media (--sm) {
         /* width: calc(100vw); */
@@ -195,7 +195,7 @@ const personGraph = {
     }
 
     .person-body {
-      flex-basis: 40%;
+      flex-basis: 50%;
       flex-shrink: 0;
       margin-left: auto;
       max-width: 65ch;
@@ -203,6 +203,10 @@ const personGraph = {
       @media (--sm) {
         flex-basis: 100%;
         margin-left: 0;
+      }
+
+      :global(.prose) {
+        text-align: justify;
       }
     }
 

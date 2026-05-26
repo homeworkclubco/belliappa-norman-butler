@@ -13,6 +13,7 @@ sections:
     people:
       - name: Shruti Belliappa
         image:
+          src: https://placehold.co/3000x4000
           alt: Portrait of Shruti Belliappa
         bio: <p>Shruti Belliappa is an art historian and advisor specialising in
           twentieth and twenty-first century art. For over fifteen years, she
