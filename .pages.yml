@@ -147,7 +147,7 @@ content:
           - { name: foundingDate, label: Founding date (YYYY or YYYY-MM-DD), type: string }
           - { name: logo, label: Logo (square, for Google Knowledge Panel), type: image }
           - { name: email, label: Contact email, type: string }
-          - { name: telephone, label: Phone (E.164, e.g. +44 20 1234 5678), type: string }
+          - { name: telephone, label: Phone, type: string }
           - name: sameAs
             label: Social / profile URLs (Instagram, LinkedIn, press, etc.)
             type: string
