@@ -130,6 +130,9 @@ content:
     type: file
     path: src/content/settings.json
     format: json
+    media:
+      input: src/assets/uploads
+      output: ../assets/uploads
     fields:
       - name: navLinks
         label: Header navigation links

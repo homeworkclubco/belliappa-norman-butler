@@ -3,6 +3,7 @@ import Heading from "@components/display/Heading.astro";
 import Prose from "@components/display/Prose.astro";
 import Container from "@components/layout/Container.astro";
 import Frame from "@components/layout/Frame.astro";
+import HeadingNavReveal from "@components/layout/HeadingNavReveal.astro";
 import Section from "@components/layout/Section.astro";
 import Stack from "@components/layout/Stack.astro";
 import { SITE } from "@config";
@@ -66,7 +67,9 @@ const personGraph = {
       {
         heading && (
           <div class="heading-pin">
-            <Heading as="h1" set:html={heading} data-reveal />
+            <HeadingNavReveal as="h1">
+              <Heading as="h1" set:html={heading} data-reveal />
+            </HeadingNavReveal>
           </div>
         )
       }

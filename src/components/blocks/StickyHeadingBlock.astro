@@ -3,6 +3,7 @@ import Heading from "@components/display/Heading.astro";
 import Prose from "@components/display/Prose.astro";
 import Cluster from "@components/layout/Cluster.astro";
 import Container from "@components/layout/Container.astro";
+import HeadingNavReveal from "@components/layout/HeadingNavReveal.astro";
 import Section from "@components/layout/Section.astro";
 import type { InferEntrySchema } from "astro:content";
 
@@ -26,7 +27,13 @@ const { id, heading, body } = block;
       space="2xl"
     >
       <div class="heading-col" data-reveal>
-        {heading && <Heading as="h2" size="3" set:html={heading} />}
+        {
+          heading && (
+            <HeadingNavReveal as="h2" size="3">
+              <Heading as="h2" size="3" set:html={heading} />
+            </HeadingNavReveal>
+          )
+        }
       </div>
       <div class="body-col" data-reveal style="--reveal-delay: 200ms;">
         {
