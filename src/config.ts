@@ -9,7 +9,7 @@ export type Site = {
 };
 
 export const SITE: Site = {
-  website: "https://bnb.viewing.studio",
+  website: "https://bnb.art",
   author: "Belliappa Norman-Butler",
   seo: {
     title:

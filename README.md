@@ -2,7 +2,7 @@
 
 Website for **Belliappa Norman-Butler**, a London-based hybrid art advisory practice building distinguished post-war and contemporary art collections worldwide.
 
-**Live URL:** [https://bnb.viewing.studio](https://bnb.viewing.studio)
+**Live URL:** [https://bnb.art](https://bnb.art)
 
 ---
 
