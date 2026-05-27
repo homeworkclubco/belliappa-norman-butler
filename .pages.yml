@@ -117,7 +117,6 @@ content:
     fields:
       - { name: uuid, label: UUID, type: uuid, options: {editable: false, generate: false} }
       - { name: title, label: Title (Internal reference), type: string }
-      - { name: description, label: Description, type: text }
       - { name: slug, label: URL slug (e.g. about or services/events), type: string }
       - { name: hideHeaderTrigger, label: Hide header menu trigger, description: "For pages that provide their own menu trigger (e.g. the centered monogram on Enquiries).", type: boolean, default: false }
       - name: seo

@@ -28,7 +28,6 @@ const pages = defineCollection({
     z.object({
   uuid: z.string().uuid().optional(),
   title: z.string().optional(),
-  description: z.string().optional(),
   slug: z.string().optional(),
   hideHeaderTrigger: z.boolean().default(false),
   seo: z.object({
