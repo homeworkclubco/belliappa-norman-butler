@@ -5,8 +5,7 @@ hideHeaderTrigger: false
 seo:
   title: Belliappa Norman-Butler | Contemporary Art Advisory, London
   description: London-based art advisory building distinguished post-war and
-    contemporary collections. Strategic acquisitions, primary-market access and
-    curatorial vision worldwide.
+    contemporary collections.
   image: ../../assets/uploads/meta-share.png
 sections:
   - type: homepageBlock
