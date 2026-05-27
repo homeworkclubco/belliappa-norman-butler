@@ -48,7 +48,7 @@ sections:
           East and Africa. In recent years, she has collaborated on an ambitious
           program of commercial exhibition making, drawing from expansive
           curatorial and historical lineages featuring David Hammons, Andy
-          Warhol, Lubaina Himid, Per Kirkeby.&nbsp;</p><p>She is known for
+          Warhol, Lubaina Himid and Per Kirkeby.&nbsp;</p><p>She is known for
           sourcing rare and difficult to access blue chip and contemporary art
           works, and has a strong record of identifying emerging talent early
           on. Artists such as Lynette Yiadom-Boakye, Jadé Fadojutimi, Issy Wood
