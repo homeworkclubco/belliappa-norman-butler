@@ -23,6 +23,7 @@ import { Image } from "astro:assets";
     fetchpriority="high"
   />
   <Container>
+    <h1 class="sr-only">Belliappa Norman-Butler, Contemporary Art Advisory, London</h1>
     <button
       type="button"
       class="logoButton"
@@ -30,7 +31,7 @@ import { Image } from "astro:assets";
       aria-controls="mobile-menu"
       aria-label="Open navigation menu"
     >
-      <FullLogo class="logo" data-reveal style="--reveal-delay: 500ms;" />
+      <FullLogo class="logo" data-reveal style="--reveal-delay: 500ms;" aria-hidden="true" />
     </button>
   </Container>
 </Section>
